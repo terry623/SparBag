@@ -116,7 +116,7 @@ class Find extends React.Component {
             //     show_flight = infor.flight_code,
             //     show_date = infor.date
             // });
-            console.log("haha");
+            console.log(infor);
             // console.log("Result: ", infor.FlightInfoStatusResult.flights[0].ident);
         }).catch(err => {
             console.error('Error getting flight', err);

@@ -107,7 +107,7 @@ class Chat extends React.Component {
 			this.setState({ travel_time: nextProps.time, start_timer: true });
 			this.timer_id = setInterval(
 				() => this.timer(),
-				60000
+				6000000
 			);
 		}
 	}
