@@ -17,9 +17,9 @@ export function show_message(message) {
     };
 }
 
-export function sign_up(username, password) {
+export function sign_up(username, email, password, passport) {
     return (dispatch, getState) => {
-        return signup_FromApi(username, password).then(infor => {
+        return signup_FromApi(username, email, password, passport).then(infor => {
             dispatch(show_message("Finish Sign Up!"));
         }).catch(err => {
             dispatch(show_message("Account Exist!"));

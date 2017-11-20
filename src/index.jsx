@@ -11,7 +11,7 @@ import { photos } from 'states/photos-reducers.js';
 import { chat } from 'states/chat-reducers.js';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import createMuiTheme from 'material-ui/styles/theme';
+import { createMuiTheme } from 'material-ui/styles';
 import { MuiThemeProvider } from 'material-ui/styles';
 
 const theme = createMuiTheme();

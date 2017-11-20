@@ -6,7 +6,6 @@ import Button from 'material-ui/Button';
 import { log_in, show_message } from 'states/account-actions.js';
 import Input from 'material-ui/Input/Input';
 import Grid from 'material-ui/Grid';
-import ReactVerifyCode from 'react-verify-code'
 
 import AccountcircleIcon from 'material-ui-icons/Accountcircle';
 import LockIcon from 'material-ui-icons/Lock';
@@ -62,17 +61,12 @@ class LogIn extends React.Component {
         return (
 
             <div className='login'>
-
                 <Grid
                     container
                     align='center'
                     direction='column'
                     justify='center'
                 >
-                    <Grid item>
-                        <h3>Welcome!</h3>
-                    </Grid>
-
                     <Grid
                         container
                         align='center'
@@ -81,11 +75,8 @@ class LogIn extends React.Component {
                         className='username'
                     >
                         <Grid item>
-                            <AccountcircleIcon className='log_in_icon' />
-                        </Grid>
-                        <Grid item>
                             <Input
-                                placeholder='Username'
+                                placeholder='電子郵件地址'
                                 value={this.state.temp_username}
                                 disableUnderline={true}
                                 onChange={event => this.setState({ temp_username: event.target.value })}
@@ -101,11 +92,8 @@ class LogIn extends React.Component {
                         className='password'
                     >
                         <Grid item>
-                            <LockIcon className='log_in_icon' />
-                        </Grid>
-                        <Grid item>
                             <Input
-                                placeholder='Password'
+                                placeholder='密碼'
                                 value={this.state.temp_password}
                                 type='password'
                                 disableUnderline={true}
@@ -119,17 +107,13 @@ class LogIn extends React.Component {
                         align='center'
                         direction='row'
                         justify='center'
+                        className='submit'
                     >
                         <Grid item>
-                            <ReactVerifyCode />
+                            <Button raised color="accent" onClick={this.handleLogin}>
+                                使用Email登入
+                            </Button>
                         </Grid>
-                    </Grid>
-
-
-                    <Grid item className='submit'>
-                        <Button raised color="accent" onClick={this.handleLogin}>
-                            LOG IN
-                        </Button>
                     </Grid>
 
                 </Grid>

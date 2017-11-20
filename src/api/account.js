@@ -9,13 +9,15 @@ const BaseUrl = 'http://localhost:8080/api';
 // Production server URL
 // const postBaseUrl = 'http://weathermood-production.us-west-2.elasticbeanstalk.com/api';
 
-export function signup(username, password) {
+export function signup(username, email, password, passport) {
     let url = `${BaseUrl}/signup`;
 
     console.log(`Making POST request to: ${url}`);
     return axios.post(url, {
         username,
-        password
+        email,
+        password,
+        passport
     }).then(function (res) {
         if (res.status !== 200)
             throw new Error(`Unexpected response code: ${res.status}`);

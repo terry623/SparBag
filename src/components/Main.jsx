@@ -12,6 +12,7 @@ import LogIn from 'components/LogIn.jsx';
 import SignUp from 'components/SignUp.jsx';
 import Camera from 'components/Camera.jsx';
 import Collection from 'components/Collection.jsx';
+import Find from 'components/Find.jsx';
 
 import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
@@ -149,7 +150,7 @@ class Main extends React.Component {
                     </div>
 
                     <Route exact path="/" render={() => (
-                        <LogIn />
+                        <Find />
                     )} />
 
                     <Route exact path="/Camera" render={() => (

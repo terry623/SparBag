@@ -1,6 +1,4 @@
 .signup {
-    background-color: #2c3338;
-    opacity: 0.8;
     width: 25rem;
     padding-top: 5rem;
     padding-bottom: 5rem;
@@ -18,8 +16,9 @@
 }
 
 .signup .username,
+.signup .email,
 .signup .password,
-.signup .password_2,
+.signup .passport,
 .signup Button {
     width: 20rem;
     height: 3rem;
@@ -39,6 +38,13 @@
     padding-top: 0.5rem;
 }
 
+.signup .email {
+    background-color: #3b4148;
+    margin-bottom: 1.25rem;
+    padding-right: 3rem;
+    padding-top: 0.5rem;
+}
+
 .signup .password {
     background-color: #3b4148;
     margin-bottom: 1.25rem;
@@ -46,7 +52,7 @@
     padding-top: 0.5rem;
 }
 
-.signup .password_2 {
+.signup .passport {
     background-color: #3b4148;
     margin-bottom: 0.25rem;
     padding-right: 3rem;

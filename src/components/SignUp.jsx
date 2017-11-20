@@ -28,8 +28,9 @@ class SignUp extends React.Component {
         super(props);
         this.state = {
             temp_username: "",
+            temp_email: "",
             temp_password: "",
-            temp_password_2: "",
+            temp_passport: "",
             open: true
         };
 
@@ -45,7 +46,7 @@ class SignUp extends React.Component {
 
     handleRequestClose_success() {
         this.setState({ open: false });
-        this.setState({ temp_username: "", temp_password: "", temp_password_2: "" });
+        this.setState({ temp_username: "", temp_email: "", temp_password: "", temp_passport: "" });
         this.props.dispatch(show_message("Nothing Happen"));
     }
 
@@ -65,10 +66,6 @@ class SignUp extends React.Component {
                     direction='column'
                     justify='center'
                 >
-                    <Grid item>
-                        <h3>Join Us!</h3>
-                    </Grid>
-
                     <Grid
                         container
                         align='center'
@@ -77,11 +74,8 @@ class SignUp extends React.Component {
                         className='username'
                     >
                         <Grid item>
-                            <AccountcircleIcon className='sign_up_icon' />
-                        </Grid>
-                        <Grid item>
                             <Input
-                                placeholder='Username'
+                                placeholder='姓名'
                                 value={this.state.temp_username}
                                 disableUnderline={true}
                                 onChange={event => this.setState({ temp_username: event.target.value })}
@@ -94,14 +88,28 @@ class SignUp extends React.Component {
                         align='center'
                         direction='row'
                         justify='center'
+                        className='email'
+                    >
+                        <Grid item>
+                            <Input
+                                placeholder='電子郵件'
+                                value={this.state.temp_email}
+                                disableUnderline={true}
+                                onChange={event => this.setState({ temp_email: event.target.value })}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        container
+                        align='center'
+                        direction='row'
+                        justify='center'
                         className='password'
                     >
                         <Grid item>
-                            <LockIcon className='sign_up_icon' />
-                        </Grid>
-                        <Grid item>
                             <Input
-                                placeholder='Password'
+                                placeholder='密碼'
                                 value={this.state.temp_password}
                                 type='password'
                                 disableUnderline={true}
@@ -115,26 +123,30 @@ class SignUp extends React.Component {
                         align='center'
                         direction='row'
                         justify='center'
-                        className='password_2'
+                        className='passport'
                     >
                         <Grid item>
-                            <LockIcon className='sign_up_icon' />
-                        </Grid>
-                        <Grid item>
                             <Input
-                                placeholder='Password Again'
-                                value={this.state.temp_password_2}
-                                type='password'
+                                placeholder='護照號碼'
+                                value={this.state.temp_passport}
                                 disableUnderline={true}
-                                onChange={event => this.setState({ temp_password_2: event.target.value })}
+                                onChange={event => this.setState({ temp_password: event.target.value })}
                             />
                         </Grid>
                     </Grid>
 
-                    <Grid item className='submit'>
-                        <Button raised color="accent" onClick={this.handleSignup}>
-                            Sign Up
-                        </Button>
+                    <Grid
+                        container
+                        align='center'
+                        direction='row'
+                        justify='center'
+                        className='submit'
+                    >
+                        <Grid item>
+                            <Button raised color="accent" onClick={this.handleSignup}>
+                                使用Email註冊
+                            </Button>
+                        </Grid>
                     </Grid>
 
                 </Grid>
@@ -145,22 +157,6 @@ class SignUp extends React.Component {
                         <DialogContent>
                             <DialogContentText>
                                 Please try another account!
-                        </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleRequestClose} color="primary">
-                                Got it!
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                }
-
-                {message === "Two input password must be consistent!" &&
-                    <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-                        <DialogTitle>{"Two input password must be consistent"}</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                Please input correct password!
                         </DialogContentText>
                         </DialogContent>
                         <DialogActions>
@@ -192,11 +188,8 @@ class SignUp extends React.Component {
     }
 
     handleSignup() {
-        if (this.state.temp_password !== this.state.temp_password_2) {
-            this.props.dispatch(show_message("Two input password must be consistent!"));
-        } else {
-            this.props.dispatch(sign_up(this.state.temp_username, this.state.temp_password));
-        }
+        const { temp_username, temp_email, temp_password, temp_passport } = this.state;
+        this.props.dispatch(sign_up(temp_username, temp_email, temp_password, temp_passport));
     }
 }
 
