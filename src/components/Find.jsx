@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
-import { search_flight } from 'api/flight.js';
+import { search_flight, search_flight_by_destination } from 'api/flight.js';
 import Button from 'material-ui/Button';
 import Input from 'material-ui/Input/Input';
 import Grid from 'material-ui/Grid';
@@ -26,11 +26,14 @@ class Find extends React.Component {
         this.state = {
             temp_airport_code: "",
             temp_date: "",
+            temp_departure: "",
+            temp_arrival: "",
             open: true,
             open_success: true
         };
 
         this.handleFind = this.handleFind.bind(this);
+        this.handleFind_2 = this.handleFind_2.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
         this.handleRequestClose_success = this.handleRequestClose_success.bind(this);
     }
@@ -105,6 +108,79 @@ class Find extends React.Component {
 
                 </Grid>
 
+                <Grid
+                    container
+                    align='center'
+                    direction='column'
+                    justify='center'
+                >
+                    <Grid
+                        container
+                        align='center'
+                        direction='row'
+                        justify='center'
+                        className='departure'
+                    >
+                        <Grid item>
+                            <Input
+                                placeholder='請選擇出發地'
+                                value={this.state.temp_departure}
+                                disableUnderline={true}
+                                onChange={event => this.setState({ temp_departure: event.target.value })}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        container
+                        align='center'
+                        direction='row'
+                        justify='center'
+                        className='arrival'
+                    >
+                        <Grid item>
+                            <Input
+                                placeholder='請選擇目的地'
+                                value={this.state.temp_arrival}
+                                disableUnderline={true}
+                                onChange={event => this.setState({ temp_arrival: event.target.value })}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        container
+                        align='center'
+                        direction='row'
+                        justify='center'
+                        className='date'
+                    >
+                        <Grid item>
+                            <Input
+                                placeholder='請選擇出發日期'
+                                value={this.state.temp_date}
+                                disableUnderline={true}
+                                onChange={event => this.setState({ temp_date: event.target.value })}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Grid
+                        container
+                        align='center'
+                        direction='row'
+                        justify='center'
+                        className='submit'
+                    >
+                        <Grid item>
+                            <Button raised color="accent" onClick={this.handleFind_2}>
+                                搜尋
+                            </Button>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+
             </div >
         );
     }
@@ -112,12 +188,16 @@ class Find extends React.Component {
     handleFind() {
         const { temp_airport_code, temp_date } = this.state;
         search_flight(temp_airport_code, temp_date).then(infor => {
-            // this.setState({
-            //     show_flight = infor.flight_code,
-            //     show_date = infor.date
-            // });
             console.log(infor);
-            // console.log("Result: ", infor.FlightInfoStatusResult.flights[0].ident);
+        }).catch(err => {
+            console.error('Error getting flight', err);
+        });
+    }
+
+    handleFind_2() {
+        const { temp_departure, temp_arrival, temp_date } = this.state;
+        search_flight_by_destination(temp_departure, temp_arrival, temp_date).then(infor => {
+            console.log(infor);
         }).catch(err => {
             console.error('Error getting flight', err);
         });
