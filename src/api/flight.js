@@ -1,12 +1,10 @@
 import axios from 'axios';
-
-var username = 'terry92516';
-var apiKey = '67607a0a321e88d68282fe53ef8ecd38c8de1e09';
-var baseFxmlUrl = 'https://' + username + ':' + apiKey + '@flightxml.flightaware.com/json/FlightXML3/';
+const BaseUrl = 'http://ptx.transportdata.tw/MOTC/v2/Air/';
 
 export function search_flight(flight_code, date) {
-    var url = 'http://ptx.transportdata.tw/MOTC/v2/Air/FIDS/Flight?$top=30&$format=JSON';
 
+    let url = `${BaseUrl}/GeneralSchedule/International?$filter=FlightNumber%20eq%20'${flight_code}'&$top=30&$format=JSON`;
+    
     console.log(`Making request to: ${url}`);
 
     return axios.get(url).then(function (res) {
