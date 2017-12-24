@@ -4,6 +4,5 @@
 ### Installation
 
 ```sh
-$ meteor npm install
 $ meteor
 ```
