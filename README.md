@@ -1,9 +1,9 @@
-# SparkBag
+# SparBag
 > 預約行李托運，輕鬆旅行
 
 ### Installation
 
 ```sh
-$ npm install
-$ npm run watch
+$ meteor npm install
+$ meteor
 ```
