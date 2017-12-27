@@ -13,6 +13,47 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/colors/main.css" id="colors">
 
+	<script>
+		var login_submit = function () {
+			var target_url = "http://localhost:8080/api/login";
+
+			$.ajax({
+				url: target_url,
+				type: "POST",
+				data: {
+					username: $("#username").val(),
+					password: $("#password").val()
+				},
+				success: function (msg) {
+					alert("Success Login!\n");
+				},
+				error: function (msg) {
+					alert("Error Login!\n");
+				},
+			});
+		}
+
+		var register_submit = function () {
+			var target_url = "http://localhost:8080/api/signup";
+
+			$.ajax({
+				url: target_url,
+				type: "POST",
+				data: {
+					username: $("#username2").val(),
+					email: $("#email2").val(),
+					password1: $("#password1").val(),
+					passportnumber: $("#passportnumber").val()
+				},
+				success: function (msg) {
+					alert("Success Register!\n");
+				},
+				error: function (msg) {
+					alert("Error Register!\n");
+				},
+			});
+		}
+	</script>
 
 </head>
 
@@ -185,7 +226,7 @@
 
 								<!-- Login -->
 								<div class="tab-content" id="tab1" style="display: none;">
-									<form method="post" class="login">
+									<form id="login_server" class="login">
 
 										<p class="form-row form-row-wide">
 											<label for="username">帳號:
@@ -206,7 +247,7 @@
 
 										<div class="form-row ">
 											<div style="text-align: center;">
-												<input type="submit" class="button border margin-top-5" name="login" value="登入" />
+												<input type="button" class="button border margin-top-5" name="login" value="登入" onClick="login_submit()" />
 											</div>
 											<!--	
 									<div class="checkboxes margin-top-10">
@@ -222,7 +263,7 @@
 								<!-- Register -->
 								<div class="tab-content" id="tab2" style="display: none;">
 
-									<form method="post" class="register">
+									<form id="register_server" class="register">
 
 										<p class="form-row form-row-wide">
 											<label for="username2">帳號:
@@ -259,7 +300,7 @@
 											</label>
 										</p>
 										<div style="text-align: center;">
-											<input type="submit" class="button border fw margin-top-10" name="register" value="註冊" />
+											<input type="button" class="button border fw margin-top-10" name="register" value="註冊" onClick="register_submit()" />
 										</div>
 
 									</form>

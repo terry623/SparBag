@@ -8,7 +8,6 @@ var app = express();
 var port = 8080;
 var server = app.listen(port, () => {
   console.log(`Server is up and running on port ${port}...`);
-  console.log('\n');
 });
 
 app.use(express.static('dist'));

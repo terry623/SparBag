@@ -3,17 +3,21 @@ const bodyParser = require('body-parser');
 
 const signupModel = require('../model/signup.js');
 const loginModel = require('../model/login.js');
+const otherModel = require('../model/other.js');
 const router = express.Router();
-
 router.use(bodyParser.json());
 
-// Sign Up
 router.post('/signup', function (req, res, next) {
 
     const {
         username,
-        password
+        email,
+        password1,
+        passportnumber
     } = req.body;
+
+    console.log("Sign Up!")
+    console.log(username + ", " + email + ", " + password1 + ", " + passportnumber);
 
     signupModel.check_username(username).then(result => {
         if (result.length > 0) {
@@ -21,14 +25,7 @@ router.post('/signup', function (req, res, next) {
             err.status = 400;
             throw err;
         } else {
-            signupModel.create_account(username, password).then(infor => {
-                otherModel.show_all_users().then(people => {
-                    people.map(result => {
-                        if (infor.username !== result.username) {
-                            chatModel.add_friends(infor.username, result.username).then(relationship => {}).catch(next);
-                        }
-                    });
-                }).catch(next);
+            signupModel.create_account(username, password1).then(infor => {
                 res.json(infor);
             }).catch(next);
         }
@@ -36,7 +33,6 @@ router.post('/signup', function (req, res, next) {
 
 });
 
-// Log In
 router.post('/login', function (req, res, next) {
 
     const {
@@ -44,12 +40,11 @@ router.post('/login', function (req, res, next) {
         password
     } = req.body;
 
-    console.log("username:" + username);
-    console.log("password: "+ password);
+    console.log("Log In!")
+    console.log(username + ", " + password);
 
     loginModel.verify(username).then(infor => {
         if (infor.length > 0) {
-
             if (infor[0].password === password) {
                 res.json(infor);
             } else {
@@ -62,6 +57,14 @@ router.post('/login', function (req, res, next) {
             err.status = 400;
             throw err;
         }
+    }).catch(next);
+
+});
+
+router.post('/show_all_users', function (req, res, next) {
+
+    otherModel.show_all_users().then(infor => {
+        res.json(infor);
     }).catch(next);
 
 });
