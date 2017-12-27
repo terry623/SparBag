@@ -15,6 +15,20 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 	<script>
+		try {
+			var user = sessionStorage.getItem('haveuser');
+			console.log("Current User: " + user);
+			if (user !== null) {
+				var checkExist = setInterval(function () {
+					if ($('#replace').length) {
+						replace_user_menu_login(user);
+						clearInterval(checkExist);
+					}
+				}, 100);
+			}
+
+		} catch (err) {}
+
 		var login_submit = function () {
 
 			axios.post('/api/login', {
@@ -22,10 +36,15 @@
 					password: $("#password").val()
 				})
 				.then(function (response) {
-					console.log(response);
+					// replace_user_menu_login();
+					// $('#sign-in-dialog').css('display', 'none');
+					// document.getElementById("sign-in-dialog").className = "zoom-anim-dialog mfp-hide";
+					var user = $("#username").val();
+					sessionStorage.setItem('haveuser', user);
+					location.reload();
 				})
 				.catch(function (error) {
-					console.log(error);
+					alert("Something Wrong!");
 				});
 		}
 
@@ -34,16 +53,63 @@
 			axios.post('/api/signup', {
 					username: $("#username2").val(),
 					email: $("#email2").val(),
-					password1: $("#password1").val(),
+					password: $("#password1").val(),
 					passportnumber: $("#passportnumber").val()
 				})
 				.then(function (response) {
-					console.log(response);
+					// replace_user_menu_signup();
+					// $('#sign-in-dialog').css('display', 'none');
+					// document.getElementById("sign-in-dialog").className = "zoom-anim-dialog mfp-hide";
+					location.reload();
 				})
 				.catch(function (error) {
-					console.log(error);
+					alert("Something Wrong!");
 				});
 		}
+
+		var replace_user_menu_login = function (user) {
+
+			var myvar =
+				'<div class="user-menu"> \
+					<div class="user-name"><span><img src="images/userphoto/person_3.jpg" alt=""></span>' +
+				user +
+				'</div> \
+					<ul> \
+						<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> 我的航程</a></li> \
+						<li><a href="dashboard-messages.html"><i class="sl sl-icon-bell"></i> 通知</a></li> \
+						<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> 預約託運</a></li> \
+						<li><a href="dashboard-my-listings.html"><i class="sl sl-icon-layers"></i> 我的重量</a></li> \
+						<li><a id="logout" onclick="logout()"><i class="sl sl-icon-power"></i> 登出</a></li> \
+					</ul> \
+				</div>';
+
+			$("#replace").replaceWith(myvar);
+		}
+
+		var replace_user_menu_signup = function (user) {
+
+			var myvar =
+				'<div class="user-menu"> \
+					<div class="user-name"><span><img src="images/userphoto/person_3.jpg" alt=""></span>' +
+				user +
+				'</div> \
+					<ul> \
+						<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> 我的航程</a></li> \
+						<li><a href="dashboard-messages.html"><i class="sl sl-icon-bell"></i> 通知</a></li> \
+						<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> 預約託運</a></li> \
+						<li><a href="dashboard-my-listings.html"><i class="sl sl-icon-layers"></i> 我的重量</a></li> \
+						<li><a id="logout" onclick="logout()"><i class="sl sl-icon-power"></i> 登出</a></li> \
+					</ul> \
+				</div>';
+
+			$("#replace").replaceWith(myvar);
+		}
+
+		var logout = function () {
+			sessionStorage.removeItem('haveuser');
+			location.reload();
+		}
+
 	</script>
 
 </head>
@@ -186,7 +252,7 @@
 					<div class="right-side">
 						<div class="header-widget">
 
-							<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim">登入/註冊</a>
+							<a href="#sign-in-dialog" id="replace" class="sign-in popup-with-zoom-anim">登入/註冊</a>
 							<a href="dashboard-add-listing.html" class="button border with-icon">發布重量
 								<i class="sl sl-icon-plus"></i>
 							</a>

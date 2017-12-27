@@ -12,12 +12,12 @@ router.post('/signup', function (req, res, next) {
     const {
         username,
         email,
-        password1,
+        password,
         passportnumber
     } = req.body;
 
-    console.log("Sign Up!")
-    console.log(username + ", " + email + ", " + password1 + ", " + passportnumber);
+    console.log("// Sign Up //")
+    console.log(req.body);
 
     signupModel.check_username(username).then(result => {
         if (result.length > 0) {
@@ -25,7 +25,8 @@ router.post('/signup', function (req, res, next) {
             err.status = 400;
             throw err;
         } else {
-            signupModel.create_account(username, password1).then(infor => {
+            signupModel.create_account(username, email, password, passportnumber).then(infor => {
+                console.log("Success!");
                 res.json(infor);
             }).catch(next);
         }
@@ -40,13 +41,14 @@ router.post('/login', function (req, res, next) {
         password
     } = req.body;
 
-    console.log("Log In!")
-    // console.log(username + ", " + password);
+    console.log("// Log In //");
     console.log(req.body);
 
     loginModel.verify(username).then(infor => {
         if (infor.length > 0) {
             if (infor[0].password === password) {
+                console.log("Success!");
+                console.log(infor);
                 res.json(infor);
             } else {
                 const err = new Error('Wrong Password!');

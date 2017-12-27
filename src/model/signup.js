@@ -13,15 +13,17 @@ function check_username(username) {
     return db.any(sql, [username]);
 }
 
-function create_account(username, password) {
+function create_account(username, email, password, passportnumber) {
     const sql = `
         INSERT INTO Users ($<this:name>)
-        VALUES ($<username>, $<password>)
+        VALUES ($<username>, $<email>, $<password>, $<passportnumber>)
         RETURNING *
     `;
     return db.one(sql, {
         username,
-        password
+        email,
+        password,
+        passportnumber
     });
 }
 

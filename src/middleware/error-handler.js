@@ -3,7 +3,6 @@ const moment = require('moment');
 
 module.exports = function (err, req, res, next) {
     console.error(err);
-    console.error(err.message);
 
     const log = `${moment().unix()} ERROR  ${err.stack}\n`;
     fs.appendFile('logs.txt', log, (err) => {

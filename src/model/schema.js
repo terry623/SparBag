@@ -8,7 +8,9 @@ const schemaSql = `
     CREATE TABLE Users (
         id              serial PRIMARY KEY NOT NULL,
         "username"      varchar(50) NOT NULL,
-        "password"      varchar(50) NOT NULL
+        "email"         varchar(50) NOT NULL,
+        "password"      varchar(50) NOT NULL,
+        "passportnumber" varchar(50) NOT NULL
     );
 `;
 
