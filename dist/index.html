@@ -12,46 +12,37 @@
 ================================================== -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/colors/main.css" id="colors">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 	<script>
 		var login_submit = function () {
-			var target_url = "http://localhost:8080/api/login";
 
-			$.ajax({
-				url: target_url,
-				type: "POST",
-				data: {
+			axios.post('/api/login', {
 					username: $("#username").val(),
 					password: $("#password").val()
-				},
-				success: function (msg) {
-					alert("Success Login!\n");
-				},
-				error: function (msg) {
-					alert("Error Login!\n");
-				},
-			});
+				})
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 		}
 
 		var register_submit = function () {
-			var target_url = "http://localhost:8080/api/signup";
 
-			$.ajax({
-				url: target_url,
-				type: "POST",
-				data: {
+			axios.post('/api/signup', {
 					username: $("#username2").val(),
 					email: $("#email2").val(),
 					password1: $("#password1").val(),
 					passportnumber: $("#passportnumber").val()
-				},
-				success: function (msg) {
-					alert("Success Register!\n");
-				},
-				error: function (msg) {
-					alert("Error Register!\n");
-				},
-			});
+				})
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 		}
 	</script>
 
