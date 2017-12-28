@@ -11,8 +11,8 @@ $ npm run start
 
 ### Install Database
 
-可參考 [PostgreSQL安裝教學](https://youtu.be/djPMnhVa76Y)
-環境變數加入以下值
+>可參考 [PostgreSQL安裝教學](https://youtu.be/djPMnhVa76Y)
+>將環境變數加入以下值
 
 | 變數 | 值 |
 | ------ | ------ |
