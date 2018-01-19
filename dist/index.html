@@ -21,6 +21,7 @@
 			if (user !== null) {
 				var checkExist = setInterval(function () {
 					if ($('#replace').length) {
+						$("#check_user").removeClass("popup-with-zoom-anim");
 						replace_user_menu_login(user);
 						clearInterval(checkExist);
 					}
@@ -41,6 +42,7 @@
 					// document.getElementById("sign-in-dialog").className = "zoom-anim-dialog mfp-hide";
 					var user = $("#username").val();
 					sessionStorage.setItem('haveuser', user);
+					// document.getElementById("check_user").classList.remove("popup-with-zoom-anim");
 					location.reload();
 				})
 				.catch(function (error) {
@@ -110,6 +112,14 @@
 			location.reload();
 		}
 
+		var check_user = function () {
+			if (sessionStorage.length == 0) {
+				$("#check_user").attr("href", "#sign-in-dialog");
+			} else {
+				location.href = "dashboard-add-listing.html";
+			}
+			return false;
+		}
 	</script>
 
 </head>
@@ -253,7 +263,7 @@
 						<div class="header-widget">
 
 							<a href="#sign-in-dialog" id="replace" class="sign-in popup-with-zoom-anim">登入/註冊</a>
-							<a href="dashboard-add-listing.html" class="button border with-icon">發布重量
+							<a href="#" class="button border with-icon popup-with-zoom-anim" id="check_user" onClick="check_user()">發布重量
 								<i class="sl sl-icon-plus"></i>
 							</a>
 						</div>
