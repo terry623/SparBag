@@ -64,12 +64,4 @@ router.post('/login', function (req, res, next) {
 
 });
 
-router.post('/show_all_users', function (req, res, next) {
-
-    otherModel.show_all_users().then(infor => {
-        res.json(infor);
-    }).catch(next);
-
-});
-
 module.exports = router;

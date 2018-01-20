@@ -12,6 +12,7 @@
 ================================================== -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/colors/main.css" id="colors">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 	<script>
 		try {
@@ -26,15 +27,42 @@
 				}, 100);
 			}
 
-		} catch (err) {}
+		} catch (err) {};
+
 
 		var replace_username = function (user) {
 			var myvar =
-					'<div class="user-name" id="changename"><span><img src="images/userphoto/person_3.jpg" alt=""></span>' +
-					user + '</div>';
+				'<div class="user-name" id="changename"><span><img src="images/userphoto/person_3.jpg" alt=""></span>' +
+				user + '</div>';
 
 			$("#changename").replaceWith(myvar);
-		}
+		};
+
+		var submit_weight = function () {
+
+			axios.post('/api/signup', {
+					select_weight = $("#select_weight :selected").text(),
+					select_departure = $("#select_departure :selected").text(),
+					select_arrive = $("#select_arrive :selected").text(),
+					fly_way = $("input[type='checkbox']").attr("id"),
+					flight_1 = $("#flight_1").val(),
+					flight_2 = $("#flight_2").val(),
+					flight_3 = $("#flight_3").val(),
+					company = $("#company").val(),
+					book_date = $("#booking-date").val(),
+					meet_start_time = $("#meet_start_time :selected").text(),
+					meet_end_time = $("#meet_end_time :selected").text(),
+					meet_place = $("#meet_place :selected").text(),
+					$money_type = ("#money_type :selected").text(),
+					money = $("#money").val()
+				})
+				.then(function (response) {
+					location.reload();
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
+		};
 	</script>
 
 </head>
@@ -364,16 +392,12 @@
 
 									<!-- Row -->
 									<div class="row with-forms">
-
-
-
-
 										<!-- 重量選擇 -->
 										<div class="col-md-12">
 											<h5>託運重量
 												<i class="tip" data-tip-content="請選擇所要提供的行李重量"></i>
 											</h5>
-											<select class="chosen-select-no-single">
+											<select class="chosen-select-no-single" id="select_weight">
 												<option label="選擇重量">選擇重量</option>
 												<option>1 kg</option>
 												<option>2 kg</option>
@@ -402,8 +426,6 @@
 												<option>25 kg</option>
 											</select>
 										</div>
-
-
 									</div>
 									<!-- Row / End -->
 
@@ -432,7 +454,7 @@
 											<h5>出發地
 												<i class="tip" data-tip-content="選擇機場代碼或機場名稱"></i>
 											</h5>
-											<select class="chosen-select">
+											<select class="chosen-select" id="select_departure">
 												<option label="選擇出發地">選擇出發地</option>
 												<option>台北-TPE</option>
 												<option>台北-TSA</option>
@@ -461,7 +483,7 @@
 											<h5>目的地
 												<i class="tip" data-tip-content="選擇機場代碼或機場名稱"></i>
 											</h5>
-											<select class="chosen-select">
+											<select class="chosen-select" id="select_arrive">
 												<option label="選擇出發地">選擇出發地</option>
 												<option>台北-TPE</option>
 												<option>台北-TSA</option>
@@ -514,25 +536,25 @@
 										<!-- 航班編號 -->
 										<div class="col-md-12">
 											<h5>航班編號-1</h5>
-											<input type="text" placeholder="請填寫航班號碼 ex.CI005 ">
+											<input type="text" placeholder="請填寫航班號碼 ex.CI005 " id="flight_1">
 										</div>
 
 										<!-- 航班編號2 -->
 										<div class="col-md-12">
 											<h5>航班編號-2</h5>
-											<input type="text" placeholder="請填寫航班號碼 ex.CI005 ">
+											<input type="text" placeholder="請填寫航班號碼 ex.CI005 " id="flight_2">
 										</div>
 
 										<!-- 航班編號3 -->
 										<div class="col-md-12">
 											<h5>航班編號-3</h5>
-											<input type="text" placeholder="請填寫航班號碼 ex.CI005 ">
+											<input type="text" placeholder="請填寫航班號碼 ex.CI005 " id="flight_3">
 										</div>
 
 										<!-- 航空公司 -->
 										<div class="col-md-12">
 											<h5>航空公司</h5>
-											<input type="text" placeholder="請填寫所搭乘的航空 ">
+											<input type="text" placeholder="請填寫所搭乘的航空 " id="company">
 										</div>
 
 										<!-- Date Picker - docs: http://www.vasterad.com/docs/listeo/#!/date_picker -->
@@ -581,7 +603,7 @@
 
 										<div class="col-md-6">
 											<h5>會面開始時間</h5>
-											<select class="chosen-select" data-placeholder="開始時間">
+											<select class="chosen-select" data-placeholder="開始時間" id="meet_start_time">
 												<option label="開始時間"></option>
 												<option>1:00 AM</option>
 												<option>1:30 AM</option>
@@ -635,7 +657,7 @@
 										</div>
 										<div class="col-md-6">
 											<h5>會面結束時間</h5>
-											<select class="chosen-select" data-placeholder="結束時間">
+											<select class="chosen-select" data-placeholder="結束時間" id="meet_end_time">
 												<option label="結束時間"></option>
 												<option>1:00 AM</option>
 												<option>1:30 AM</option>
@@ -693,7 +715,7 @@
 											<h5>會面地點
 												<i class="tip" data-tip-content="選擇適合的sparstation與買家進行安置行李"></i>
 											</h5>
-											<select class="chosen-select">
+											<select class="chosen-select" id="meet_place">
 												<option label="選擇適合的會面地點">選擇適合的會面地點</option>
 												<option>台北-TPE：第一航廈站 SparStation</option>
 												<option>台北-TPE：第二航廈站 SparStation</option>
@@ -762,7 +784,7 @@
 										<!-- 幣別 -->
 										<div class="col-md-12">
 											<h5>幣別</h5>
-											<select class="chosen-select-no-single">
+											<select class="chosen-select-no-single" id="money_type">
 												<option label="請選擇幣別">請選擇幣別</option>
 												<option>新台幣</option>
 												<option>美元</option>
@@ -784,7 +806,7 @@
 												<i class="tip" data-tip-content="銷售價格以每公斤計算"></i>
 												<span> (請輸入每公斤價格) </span>
 											</h5>
-											<input class="fm-input pricing-price" type="text" value="" placeholder="請輸入銷售價格" data-unit="USD" />
+											<input class="fm-input pricing-price" type="text" value="" placeholder="請輸入銷售價格" data-unit="USD" id="money" />
 
 										</div>
 
@@ -836,7 +858,7 @@
 
 
 
-							<a href="dashboard-my-listings.html" class="button preview">發布重量
+							<a href="dashboard-my-listings.html" class="button preview" onClick="submit_weight()">發布重量
 								<i class="fa fa-arrow-circle-right"></i>
 							</a>
 
@@ -882,6 +904,12 @@
 	<script type="text/javascript" src="scripts/markerclusterer.js"></script>
 	<script type="text/javascript" src="scripts/maps.js"></script>
 
+
+	<script>
+		$('input[type="checkbox"]').on('change', function () {
+			$('input[type="checkbox"]').not(this).prop('checked', false);
+		});
+	</script>
 
 	<!-- Date Picker - docs: http://www.vasterad.com/docs/listeo/#!/date_picker -->
 	<link href="css/plugins/datedropper.css" rel="stylesheet" type="text/css">
