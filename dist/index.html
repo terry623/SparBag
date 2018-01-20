@@ -37,12 +37,8 @@
 					password: $("#password").val()
 				})
 				.then(function (response) {
-					// replace_user_menu_login();
-					// $('#sign-in-dialog').css('display', 'none');
-					// document.getElementById("sign-in-dialog").className = "zoom-anim-dialog mfp-hide";
 					var user = $("#username").val();
 					sessionStorage.setItem('haveuser', user);
-					// document.getElementById("check_user").classList.remove("popup-with-zoom-anim");
 					location.reload();
 				})
 				.catch(function (error) {
@@ -59,9 +55,8 @@
 					passportnumber: $("#passportnumber").val()
 				})
 				.then(function (response) {
-					// replace_user_menu_signup();
-					// $('#sign-in-dialog').css('display', 'none');
-					// document.getElementById("sign-in-dialog").className = "zoom-anim-dialog mfp-hide";
+					var user = $("#username2").val();
+					sessionStorage.setItem('haveuser', user);
 					location.reload();
 				})
 				.catch(function (error) {

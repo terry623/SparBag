@@ -27,8 +27,66 @@
 				}, 100);
 			}
 
-		} catch (err) {};
+		} catch (err) {}
 
+		var submit_weight = function () {
+
+			if ($('input[name="check"]:checked').length > 0) {
+				var way = $('input[name="check"]:checked').attr("id");
+				switch (way) {
+					case "check-a":
+						way = "direct";
+						break;
+					case "check-b":
+						way = "once";
+						break;
+					case "check-c":
+						way = "twice";
+						break;
+				}
+			}
+
+			console.log(
+				$("#select_weight :selected").text().substring(0, 1),
+				$("#select_departure :selected").text(),
+				$("#select_arrive :selected").text(),
+				way,
+				$("#flight_1").val(),
+				$("#flight_2").val(),
+				$("#flight_3").val(),
+				$("#company").val(),
+				$("#booking-date").val(),
+				$("#meet_start_time :selected").text(),
+				$("#meet_end_time :selected").text(),
+				$("#meet_place :selected").text(),
+				$("#money_type :selected").text(),
+				$("#money").val()
+			)
+
+			axios.post('/api/submit_weight', {
+					weight : $("#select_weight :selected").text().substring(0, 1),
+					departure : $("#select_departure :selected").text(),
+					arrive : $("#select_arrive :selected").text(),
+					fly_way : way,
+					flight_1 : $("#flight_1").val(),
+					flight_2 : $("#flight_2").val(),
+					flight_3 : $("#flight_3").val(),
+					company : $("#company").val(),
+					book_date : $("#booking-date").val(),
+					meet_start_time : $("#meet_start_time :selected").text(),
+					meet_end_time : $("#meet_end_time :selected").text(),
+					meet_place : $("#meet_place :selected").text(),
+					money_type : $("#money_type :selected").text(),
+					money : $("#money").val()
+				})
+				.then(function (response) {
+					location.href = "dashboard-my-listings.html";
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
+
+		}
 
 		var replace_username = function (user) {
 			var myvar =
@@ -36,33 +94,7 @@
 				user + '</div>';
 
 			$("#changename").replaceWith(myvar);
-		};
-
-		var submit_weight = function () {
-
-			axios.post('/api/signup', {
-					select_weight = $("#select_weight :selected").text(),
-					select_departure = $("#select_departure :selected").text(),
-					select_arrive = $("#select_arrive :selected").text(),
-					fly_way = $("input[type='checkbox']").attr("id"),
-					flight_1 = $("#flight_1").val(),
-					flight_2 = $("#flight_2").val(),
-					flight_3 = $("#flight_3").val(),
-					company = $("#company").val(),
-					book_date = $("#booking-date").val(),
-					meet_start_time = $("#meet_start_time :selected").text(),
-					meet_end_time = $("#meet_end_time :selected").text(),
-					meet_place = $("#meet_place :selected").text(),
-					$money_type = ("#money_type :selected").text(),
-					money = $("#money").val()
-				})
-				.then(function (response) {
-					location.reload();
-				})
-				.catch(function (error) {
-					alert("Something Wrong!");
-				});
-		};
+		}
 	</script>
 
 </head>
@@ -858,7 +890,7 @@
 
 
 
-							<a href="dashboard-my-listings.html" class="button preview" onClick="submit_weight()">發布重量
+							<a class="button preview" onClick="submit_weight()">發布重量
 								<i class="fa fa-arrow-circle-right"></i>
 							</a>
 

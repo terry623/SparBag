@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const signupModel = require('../model/signup.js');
 const loginModel = require('../model/login.js');
+const weightModel = require('../model/weight.js');
 const otherModel = require('../model/other.js');
 const router = express.Router();
 router.use(bodyParser.json());
@@ -16,7 +17,7 @@ router.post('/signup', function (req, res, next) {
         passportnumber
     } = req.body;
 
-    console.log("// Sign Up //")
+    console.log("/ Sign Up /")
     console.log(req.body);
 
     signupModel.check_username(username).then(result => {
@@ -41,7 +42,7 @@ router.post('/login', function (req, res, next) {
         password
     } = req.body;
 
-    console.log("// Log In //");
+    console.log("/ Log In /");
     console.log(req.body);
 
     loginModel.verify(username).then(infor => {
@@ -60,6 +61,50 @@ router.post('/login', function (req, res, next) {
             err.status = 400;
             throw err;
         }
+    }).catch(next);
+
+});
+
+router.post('/submit_weight', function (req, res, next) {
+
+    const {
+        weight,
+        departure,
+        arrive,
+        fly_way,
+        flight_1,
+        flight_2,
+        flight_3,
+        company,
+        book_date,
+        meet_start_time,
+        meet_end_time,
+        meet_place,
+        money_type,
+        money
+    } = req.body;
+
+    console.log("/ Submit Weight /");
+    console.log(req.body);
+
+    weightModel.store_infor(
+        weight,
+        departure,
+        arrive,
+        fly_way,
+        flight_1,
+        flight_2,
+        flight_3,
+        company,
+        book_date,
+        meet_start_time,
+        meet_end_time,
+        meet_place,
+        money_type,
+        money
+    ).then(infor => {
+        console.log("Success!");
+        res.json(infor);
     }).catch(next);
 
 });
