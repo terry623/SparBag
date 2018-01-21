@@ -8,14 +8,15 @@ const schemaSql = `
 
     CREATE TABLE Users (
         id              serial PRIMARY KEY NOT NULL,
-        "username"      varchar(50) NOT NULL,
-        "email"         varchar(50) NOT NULL,
-        "password"      varchar(50) NOT NULL,
-        "passportnumber" varchar(50) NOT NULL
+        "username"      varchar(30) NOT NULL,
+        "email"         varchar(30) NOT NULL,
+        "password"      varchar(30) NOT NULL,
+        "passportnumber" varchar(30) NOT NULL
     );
 
     CREATE TABLE Weights (
         id              serial PRIMARY KEY NOT NULL,
+        "user"      varchar(30) NOT NULL,
         "kg"            integer,
         "dep"           varchar(30) NOT NULL,
         "arr"           varchar(30) NOT NULL,

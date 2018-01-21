@@ -68,6 +68,7 @@ router.post('/login', function (req, res, next) {
 router.post('/submit_weight', function (req, res, next) {
 
     const {
+        user,
         weight,
         departure,
         arrive,
@@ -88,6 +89,7 @@ router.post('/submit_weight', function (req, res, next) {
     console.log(req.body);
 
     weightModel.store_infor(
+        user,
         weight,
         departure,
         arrive,

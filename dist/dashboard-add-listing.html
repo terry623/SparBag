@@ -16,12 +16,12 @@
 
 	<script>
 		try {
-			var user = sessionStorage.getItem('haveuser');
-			console.log("Current User: " + user);
-			if (user !== null) {
+			var username = sessionStorage.getItem('haveuser');
+			console.log("Current User: " + username);
+			if (username !== null) {
 				var checkExist = setInterval(function () {
 					if ($('#changename').length) {
-						replace_username(user);
+						replace_username(username);
 						clearInterval(checkExist);
 					}
 				}, 100);
@@ -30,6 +30,7 @@
 		} catch (err) {}
 
 		var submit_weight = function () {
+			var username = sessionStorage.getItem('haveuser');
 
 			if ($('input[name="check"]:checked').length > 0) {
 				var way = $('input[name="check"]:checked').attr("id");
@@ -47,6 +48,7 @@
 			}
 
 			console.log(
+				username,
 				$("#select_weight :selected").text().substring(0, 1),
 				$("#select_departure :selected").text(),
 				$("#select_arrive :selected").text(),
@@ -64,20 +66,21 @@
 			)
 
 			axios.post('/api/submit_weight', {
-					weight : $("#select_weight :selected").text().substring(0, 1),
-					departure : $("#select_departure :selected").text(),
-					arrive : $("#select_arrive :selected").text(),
-					fly_way : way,
-					flight_1 : $("#flight_1").val(),
-					flight_2 : $("#flight_2").val(),
-					flight_3 : $("#flight_3").val(),
-					company : $("#company").val(),
-					book_date : $("#booking-date").val(),
-					meet_start_time : $("#meet_start_time :selected").text(),
-					meet_end_time : $("#meet_end_time :selected").text(),
-					meet_place : $("#meet_place :selected").text(),
-					money_type : $("#money_type :selected").text(),
-					money : $("#money").val()
+					user: username,
+					weight: $("#select_weight :selected").text().substring(0, 1),
+					departure: $("#select_departure :selected").text(),
+					arrive: $("#select_arrive :selected").text(),
+					fly_way: way,
+					flight_1: $("#flight_1").val(),
+					flight_2: $("#flight_2").val(),
+					flight_3: $("#flight_3").val(),
+					company: $("#company").val(),
+					book_date: $("#booking-date").val(),
+					meet_start_time: $("#meet_start_time :selected").text(),
+					meet_end_time: $("#meet_end_time :selected").text(),
+					meet_place: $("#meet_place :selected").text(),
+					money_type: $("#money_type :selected").text(),
+					money: $("#money").val()
 				})
 				.then(function (response) {
 					location.href = "dashboard-my-listings.html";
