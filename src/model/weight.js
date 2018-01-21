@@ -45,6 +45,17 @@ function store_infor(
     });
 }
 
+function get_weight(user) {
+    const where = user ? `WHERE user = '$1:value'` : '';
+    const sql = `
+        SELECT *
+        FROM Weights
+        ${where}
+    `;
+    return db.any(sql, [user]);
+}
+
 module.exports = {
-    store_infor
+    store_infor,
+    get_weight
 };

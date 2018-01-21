@@ -111,4 +111,27 @@ router.post('/submit_weight', function (req, res, next) {
 
 });
 
+router.post('/get_weight', function (req, res, next) {
+
+    const {
+        user
+    } = req.body;
+
+    console.log("/ Get Weight /")
+    console.log(req.body);
+
+    weightModel.get_weight(user).then(result => {
+        if (result.length > 0) {
+            console.log("Success!");
+            console.log(infor);
+            res.json(infor);
+        } else {
+            const err = new Error('Wrong Get Weight!');
+            err.status = 400;
+            throw err;
+        }
+    }).catch(next);
+
+});
+
 module.exports = router;

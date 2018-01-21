@@ -324,10 +324,7 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="dashboard-list-box margin-top-0">
 							<h4>已發布重量</h4>
-							<ul>
-
-								<!-- Add list !!!!! -->
-
+							<ul id="weight_list">
 							</ul>
 						</div>
 					</div>
@@ -366,97 +363,100 @@
 	<script type="text/javascript" src="scripts/custom.js"></script>
 
 	<script>
-		var username = sessionStorage.getItem('haveuser');
 
+		var username = sessionStorage.getItem('haveuser');
 		axios.post('/api/get_weight', {
 				user: username
 			})
 			.then(function (response) {
 
+				var arr;
 				arr = jQuery.map(response, function (a) {
-					return a + a;
-				});
-				// $("span").text(arr.join(", "));
-
-				'<li> \
-					<div class="list-box-listing"> \
-						<div class="list-box-img"> \
-							<a href="#"> \
-								<div style="position: relative; "> \
-									<img src="images/bagkg.png" width="280px" height="250px" alt=""> \
-									<span style="position: absolute; top: 42%;left: 38%;"> \
-										<font size="20"> \
-											<big> \
-												<big> \
-													<big>2</big> \
-												</big> \
-											</big> \
-										</font> \
-									</span> \
-								</div> \
-							</a> \
-							<ul class="booking-list"> \
-								<li>＃20170001</li> \
-							</ul> \
-						</div> \
-						<div class="list-box-listing-content"> \
-							<div class="inner"> \
-								<h3> \
-									<a href="#">中華航空</a> \
-								</h3> \
-								<span>CI005</span> \
-								<br> \
-								<div class="inner-booking-list"> \
-									<h2 style="display: inline;color: #7ccad3">台北-TPE \
-										<i style="color: #282828" class="im im-icon-Arrow-Right2"></i> \
-									</h2> \
-									<h2 style="display: inline;color: #7ccad3">洛杉磯-LAX \
-										<i style="color: #7ccad3"></i> \
-									</h2> \
-								</div> \
-								<div class="inner-booking-list"> \
-									<h5>班機日期:</h5> \
+					var text =
+						'<li> \
+							<div class="list-box-listing"> \
+								<div class="list-box-img"> \
+									<a href="#"> \
+										<div style="position: relative; "> \
+											<img src="images/bagkg.png" width="280px" height="250px" alt=""> \
+											<span style="position: absolute; top: 42%;left: 38%;"> \
+												<font size="20"> \
+													<big> \
+														<big> \
+															<big>2</big> \
+														</big> \
+													</big> \
+												</font> \
+											</span> \
+										</div> \
+									</a> \
 									<ul class="booking-list"> \
-										<li>2017-12-12</li> \
+										<li>＃20170001</li> \
 									</ul> \
 								</div> \
-								<div class="inner-booking-list"> \
-									<h5>會面時間:</h5> \
-									<ul class="booking-list"> \
-										<li>2017-12-12 9:30 A.M ~ 11:30 A.M</li> \
-									</ul> \
-								</div> \
-								<div class="inner-booking-list"> \
-									<h5>會面地點:</h5> \
-									<ul class="booking-list"> \
-										<li>台北-TPE:第二航廈站SparStation</li> \
-									</ul> \
-								</div> \
-								<div class="inner-booking-list"> \
-									<h5>開放重量:</h5> \
-									<ul class="booking-list"> \
-										<li>5</li> \
-										<li>kg</li> \
-									</ul> \
+								<div class="list-box-listing-content"> \
+									<div class="inner"> \
+										<h3> \
+											<a href="#">中華航空</a> \
+										</h3> \
+										<span>CI005</span> \
+										<br> \
+										<div class="inner-booking-list"> \
+											<h2 style="display: inline;color: #7ccad3">台北-TPE \
+												<i style="color: #282828" class="im im-icon-Arrow-Right2"></i> \
+											</h2> \
+											<h2 style="display: inline;color: #7ccad3">洛杉磯-LAX \
+												<i style="color: #7ccad3"></i> \
+											</h2> \
+										</div> \
+										<div class="inner-booking-list"> \
+											<h5>班機日期:</h5> \
+											<ul class="booking-list"> \
+												<li>2017-12-12</li> \
+											</ul> \
+										</div> \
+										<div class="inner-booking-list"> \
+											<h5>會面時間:</h5> \
+											<ul class="booking-list"> \
+												<li>2017-12-12 9:30 A.M ~ 11:30 A.M</li> \
+											</ul> \
+										</div> \
+										<div class="inner-booking-list"> \
+											<h5>會面地點:</h5> \
+											<ul class="booking-list"> \
+												<li>台北-TPE:第二航廈站SparStation</li> \
+											</ul> \
+										</div> \
+										<div class="inner-booking-list"> \
+											<h5>開放重量:</h5> \
+											<ul class="booking-list"> \
+												<li>5</li> \
+												<li>kg</li> \
+											</ul> \
+										</div> \
+									</div> \
 								</div> \
 							</div> \
-						</div> \
-					</div> \
-					<div class="buttons-to-right"> \
-						<a href="dashboard-run-listings.html" class="button gray"> &nbsp; &nbsp; \
-							<i class="sl sl-icon-list"></i> &nbsp;查看訂單資訊 &nbsp; &nbsp;</a> \
-						<br> \
-						<a href="dashboard-edit-listing.html" class="button gray"> \
-							<i class="sl sl-icon-note"></i> 編輯</a> \
-						<a href="#" class="button gray"> \
-							<i class="sl sl-icon-close"></i> 刪除</a> \
-					</div> \
-				</li>';
+							<div class="buttons-to-right"> \
+								<a href="dashboard-run-listings.html" class="button gray"> &nbsp; &nbsp; \
+									<i class="sl sl-icon-list"></i> &nbsp;查看訂單資訊 &nbsp; &nbsp;</a> \
+								<br> \
+								<a href="dashboard-edit-listing.html" class="button gray"> \
+									<i class="sl sl-icon-note"></i> 編輯</a> \
+								<a href="#" class="button gray"> \
+									<i class="sl sl-icon-close"></i> 刪除</a> \
+							</div> \
+						</li>';
+
+					return text;
+				});
+				$("#weight_list").text(arr.join());
 
 			})
 			.catch(function (error) {
 				alert("Something Wrong!");
 			});
+			
 	</script>
 
 
