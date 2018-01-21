@@ -363,15 +363,15 @@
 	<script type="text/javascript" src="scripts/custom.js"></script>
 
 	<script>
-
 		var username = sessionStorage.getItem('haveuser');
 		axios.post('/api/get_weight', {
 				user: username
 			})
 			.then(function (response) {
 
-				var arr;
-				arr = jQuery.map(response, function (a) {
+				console.log(response.data);
+				jQuery.each(response.data, function (i, val) {
+
 					var text =
 						'<li> \
 							<div class="list-box-listing"> \
@@ -383,7 +383,9 @@
 												<font size="20"> \
 													<big> \
 														<big> \
-															<big>2</big> \
+															<big>'
+																+ val.kg +
+															 '</big> \
 														</big> \
 													</big> \
 												</font> \
@@ -391,46 +393,62 @@
 										</div> \
 									</a> \
 									<ul class="booking-list"> \
-										<li>＃20170001</li> \
+										<li>'
+											+ "#00000" + val.id +
+										'</li> \
 									</ul> \
 								</div> \
 								<div class="list-box-listing-content"> \
 									<div class="inner"> \
 										<h3> \
-											<a href="#">中華航空</a> \
+											<a href="#">'
+												+ val.company +
+											'</a> \
 										</h3> \
-										<span>CI005</span> \
+										<span>'
+											+ val.fly_1 + 
+										'</span> \
 										<br> \
 										<div class="inner-booking-list"> \
-											<h2 style="display: inline;color: #7ccad3">台北-TPE \
-												<i style="color: #282828" class="im im-icon-Arrow-Right2"></i> \
+											<h2 style="display: inline;color: #7ccad3">'
+												+ val.dep +
+												'<i style="color: #282828" class="im im-icon-Arrow-Right2"></i> \
 											</h2> \
-											<h2 style="display: inline;color: #7ccad3">洛杉磯-LAX \
-												<i style="color: #7ccad3"></i> \
+											<h2 style="display: inline;color: #7ccad3">'
+												+ val.arr +
+												'<i style="color: #7ccad3"></i> \
 											</h2> \
 										</div> \
 										<div class="inner-booking-list"> \
 											<h5>班機日期:</h5> \
 											<ul class="booking-list"> \
-												<li>2017-12-12</li> \
+												<li>'
+													+ val.date +
+												'</li> \
 											</ul> \
 										</div> \
 										<div class="inner-booking-list"> \
 											<h5>會面時間:</h5> \
 											<ul class="booking-list"> \
-												<li>2017-12-12 9:30 A.M ~ 11:30 A.M</li> \
+												<li>'
+													+ val.meet_start +'~'+ val.meet_end +
+												'</li> \
 											</ul> \
 										</div> \
 										<div class="inner-booking-list"> \
 											<h5>會面地點:</h5> \
 											<ul class="booking-list"> \
-												<li>台北-TPE:第二航廈站SparStation</li> \
+												<li>'
+													+ val.meet_place +
+												'</li> \
 											</ul> \
 										</div> \
 										<div class="inner-booking-list"> \
 											<h5>開放重量:</h5> \
 											<ul class="booking-list"> \
-												<li>5</li> \
+												<li>'
+													+ val.kg +
+												'</li> \
 												<li>kg</li> \
 											</ul> \
 										</div> \
@@ -448,15 +466,14 @@
 							</div> \
 						</li>';
 
-					return text;
+					$("#weight_list").append(text);
+
 				});
-				$("#weight_list").text(arr.join());
 
 			})
 			.catch(function (error) {
 				alert("Something Wrong!");
 			});
-			
 	</script>
 
 

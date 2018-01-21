@@ -16,8 +16,8 @@ const schemaSql = `
 
     CREATE TABLE Weights (
         id              serial PRIMARY KEY NOT NULL,
-        "user"      varchar(30) NOT NULL,
-        "kg"            integer,
+        "username"      varchar(30) NOT NULL,
+        "kg"            integer    DEFAULT 0,
         "dep"           varchar(30) NOT NULL,
         "arr"           varchar(30) NOT NULL,
         "fly_way"       varchar(30) NOT NULL,
@@ -30,7 +30,7 @@ const schemaSql = `
         "meet_end"      varchar(30) NOT NULL,
         "meet_place"    varchar(30) NOT NULL,
         "money_type"    varchar(30) NOT NULL,
-        "money"         integer
+        "money"         integer    DEFAULT 0
     );
 `;
 

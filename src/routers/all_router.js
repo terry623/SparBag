@@ -123,8 +123,7 @@ router.post('/get_weight', function (req, res, next) {
     weightModel.get_weight(user).then(result => {
         if (result.length > 0) {
             console.log("Success!");
-            console.log(infor);
-            res.json(infor);
+            res.json(result);
         } else {
             const err = new Error('Wrong Get Weight!');
             err.status = 400;

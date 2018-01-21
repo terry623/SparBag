@@ -4,7 +4,7 @@ if (!global.db) {
 }
 
 function store_infor(
-    user,
+    username,
     kg,
     dep,
     arr,
@@ -22,12 +22,12 @@ function store_infor(
 ) {
     const sql = `
         INSERT INTO Weights ($<this:name>)
-        VALUES ($<user>, $<kg>, $<dep>, $<arr>, $<fly_way>, $<fly_1>, $<fly_2>, $<fly_3>,
+        VALUES ($<username>, $<kg>, $<dep>, $<arr>, $<fly_way>, $<fly_1>, $<fly_2>, $<fly_3>,
              $<company>, $<date>, $<meet_start>, $<meet_end>, $<meet_place>, $<money_type>, $<money>)
         RETURNING *
     `;
     return db.one(sql, {
-        user,
+        username,
         kg,
         dep,
         arr,
@@ -45,14 +45,13 @@ function store_infor(
     });
 }
 
-function get_weight(user) {
-    const where = user ? `WHERE user = '$1:value'` : '';
+function get_weight(username) {
     const sql = `
         SELECT *
         FROM Weights
-        ${where}
+        WHERE username = $<username>
     `;
-    return db.any(sql, [user]);
+    return db.any(sql, {username});
 }
 
 module.exports = {
