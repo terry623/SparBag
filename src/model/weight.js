@@ -51,10 +51,26 @@ function get_weight(username) {
         FROM Weights
         WHERE username = $<username>
     `;
-    return db.any(sql, {username});
+    return db.any(sql, {
+        username
+    });
+}
+
+function search_by_num(fly_num, date) {
+    const sql = `
+        SELECT *
+        FROM Weights
+        WHERE (fly_1 = $<fly_num> or fly_2 = $<fly_num> or fly_3 = $<fly_num>)
+        and date = $<date>
+    `;
+    return db.any(sql, {
+        fly_num,
+        date
+    });
 }
 
 module.exports = {
     store_infor,
-    get_weight
+    get_weight,
+    search_by_num
 };

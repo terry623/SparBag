@@ -115,6 +115,14 @@
 			}
 			return false;
 		}
+
+		var get_search = function () {
+
+			sessionStorage.setItem('fly_num', $("#search_fly").val());
+			sessionStorage.setItem('date', $("#booking-date").val());
+			location.href = "listings-list-full-width.html";
+
+		}
 	</script>
 
 </head>
@@ -399,7 +407,7 @@
 							<div class="main-search-input">
 
 								<div class="main-search-input-item">
-									<input type="text" placeholder="航班編號/班機號碼" value="" />
+									<input type="text" id="search_fly" placeholder="航班編號/班機號碼" value="" />
 								</div>
 
 								<div class="main-search-input-item">
@@ -428,7 +436,8 @@
 
 
 
-								<button class="button" onclick="window.location.href='listings-list-full-width.html'">尋找重量</button>
+								<!-- <button class="button" onclick="window.location.href='listings-list-full-width.html'">尋找重量</button> -->
+								<button class="button" onclick="get_search()">尋找重量</button>
 
 							</div>
 						</div>

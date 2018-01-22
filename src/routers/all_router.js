@@ -133,4 +133,27 @@ router.post('/get_weight', function (req, res, next) {
 
 });
 
+router.post('/search_by_num', function (req, res, next) {
+
+    const {
+        fly_num,
+        date
+    } = req.body;
+
+    console.log("/ Search By Num /")
+    console.log(req.body);
+
+    weightModel.search_by_num(fly_num, date).then(result => {
+        if (result.length > 0) {
+            console.log("Success!");
+            res.json(result);
+        } else {
+            const err = new Error('Wrong Get Weight!');
+            err.status = 400;
+            throw err;
+        }
+    }).catch(next);
+
+});
+
 module.exports = router;

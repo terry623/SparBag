@@ -17,7 +17,7 @@ const schemaSql = `
     CREATE TABLE Weights (
         id              serial PRIMARY KEY NOT NULL,
         "username"      varchar(30) NOT NULL,
-        "kg"            integer    DEFAULT 0,
+        "kg"            integer,
         "dep"           varchar(30) NOT NULL,
         "arr"           varchar(30) NOT NULL,
         "fly_way"       varchar(30) NOT NULL,
@@ -30,8 +30,14 @@ const schemaSql = `
         "meet_end"      varchar(30) NOT NULL,
         "meet_place"    varchar(30) NOT NULL,
         "money_type"    varchar(30) NOT NULL,
-        "money"         integer    DEFAULT 0
+        "money"         integer
     );
+
+    INSERT INTO Users (username, email, password, passportnumber) VALUES
+    ('111', '111@gmail.com', '111', 'xxx'),
+    ('222', '222@gmail.com', '222', 'xxx'),
+    ('333', '333@gmail.com', '333', 'xxx');
+
 `;
 
 db.none(schemaSql).then(() => {
