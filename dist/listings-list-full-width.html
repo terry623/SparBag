@@ -14,6 +14,79 @@
 	<link rel="stylesheet" href="css/colors/main.css" id="colors">
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+	<script>
+		var search_by_num = function () {
+
+			var fly_num, date;
+			if (arguments.length > 0) {
+				fly_num = arguments[0];
+				date = arguments[1];
+			} else {
+				fly_num = $("#place_num").val();
+				date = $("#booking-date").val();
+			}
+
+			axios.post('/api/search_by_num', {
+					fly_num: fly_num,
+					date: date,
+				})
+				.then(function (response) {
+					console.log(response.data);
+					$("#list_item").empty();
+
+					jQuery.each(response.data, function (i, val) {
+
+						var text =
+							'<div class="col-lg-12 col-md-12"> \
+							<div class="listing-item-container list-layout"> \
+								<a href="listings-single-page.html" class="listing-item"> \
+									<div class="listing-item-image"> \
+										<img src="images/userphoto/person_1.jpg" alt=""> \
+										<span class="tag">' +
+							val.money_type + ' ' + val.money +
+							'/公斤</span> \
+									</div> \
+									<div class="listing-item-content"> \
+										<div class="listing-item-inner"> \
+											<h3>' +
+							val.company + '</h3> \
+											<span> ' + val.fly_1 +
+							'</span> \
+											<br> \
+											<div class="star-rating" data-rating="3.5"></div> \
+											<br> \
+											<h3>' +
+							val.dep + '&nbsp; \
+												<i style="color: #7ccad3" class="im im-icon-Arrow-Right"></i>&nbsp;' + val.arr +
+							'&nbsp;</h3> \
+											<span class="like-icon"></span> \
+										</div> \
+										<div class="listing-item-details"> \
+											<h1 style="text-align: right; color: #7ccad3">' +
+							val.kg + 'kg</h1> \
+											<br> \
+										</div> \
+										<div class="listing-item-details">' + val
+							.date +
+							'</div> \
+									</div> \
+								</a> \
+							</div> \
+						</div>';
+
+						$("#list_item").append(text);
+						$("#place_num").val(fly_num);
+						$("#booking-date").val(date);
+
+					});
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
+
+		}
+	</script>
+
 </head>
 
 <body>
@@ -330,7 +403,7 @@
 					<div class="main-search-input">
 
 						<div class="main-search-input-item">
-							<input type="text" placeholder="航班編號/班機號碼" value="" id="place_num"/>
+							<input type="text" placeholder="航班編號/班機號碼" value="" id="place_num" />
 						</div>
 
 						<div class="main-search-input-item">
@@ -339,7 +412,7 @@
 						</div>
 
 
-						<button class="button" onclick="window.location.href='listings-list-full-width2.html'">尋找重量</button>
+						<button class="button" onclick="search_by_num()">尋找重量</button>
 					</div>
 				</div>
 				<!-- Search Section / End -->
@@ -688,56 +761,9 @@
 	<script src="scripts/quantityButtons.js"></script>
 
 	<script>
-		var fly_num = sessionStorage.getItem('fly_num');
-		var date = sessionStorage.getItem('date');
-
-		axios.post('/api/search_by_num', {
-				fly_num: fly_num,
-				date: date,
-			})
-			.then(function (response) {
-				console.log(response.data);
-				jQuery.each(response.data, function (i, val) {
-
-					var text =
-						'<div class="col-lg-12 col-md-12"> \
-							<div class="listing-item-container list-layout"> \
-								<a href="listings-single-page.html" class="listing-item"> \
-									<div class="listing-item-image"> \
-										<img src="images/userphoto/person_1.jpg" alt=""> \
-										<span class="tag">' + val.money_type + ' ' + val.money + '/公斤</span> \
-									</div> \
-									<div class="listing-item-content"> \
-										<div class="listing-item-inner"> \
-											<h3>' + val.company + '</h3> \
-											<span> ' + val.fly_1 + '</span> \
-											<br> \
-											<div class="star-rating" data-rating="3.5"></div> \
-											<br> \
-											<h3>' + val.dep + '&nbsp; \
-												<i style="color: #7ccad3" class="im im-icon-Arrow-Right"></i>&nbsp;' + val.arr + '&nbsp;</h3> \
-											<span class="like-icon"></span> \
-										</div> \
-										<div class="listing-item-details"> \
-											<h1 style="text-align: right; color: #7ccad3">' + val.kg + 'kg</h1> \
-											<br> \
-										</div> \
-										<div class="listing-item-details">' + val.date +
-										'</div> \
-									</div> \
-								</a> \
-							</div> \
-						</div>';
-
-					$("#list_item").append(text);
-					$("#place_num").val(fly_num);
-					$("#booking-date").val(date);
-
-				});
-			})
-			.catch(function (error) {
-				alert("Something Wrong!");
-			});
+		var session_fly_num = sessionStorage.getItem('fly_num');
+		var session_date = sessionStorage.getItem('date');
+		search_by_num(session_fly_num, session_date);
 	</script>
 
 
