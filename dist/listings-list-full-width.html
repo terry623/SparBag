@@ -85,6 +85,25 @@
 				});
 
 		}
+
+		var replace_user_menu_login = function (user) {
+
+			var myvar =
+				'<div class="user-menu"> \
+				<div class="user-name"><span><img src="images/userphoto/person_3.jpg" alt=""></span>' +
+				user +
+				'</div> \
+				<ul> \
+					<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> 我的航程</a></li> \
+					<li><a href="dashboard-messages.html"><i class="sl sl-icon-bell"></i> 通知</a></li> \
+					<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> 預約託運</a></li> \
+					<li><a href="dashboard-my-listings.html"><i class="sl sl-icon-layers"></i> 我的重量</a></li> \
+					<li><a id="logout" onclick="logout()"><i class="sl sl-icon-power"></i> 登出</a></li> \
+				</ul> \
+			</div>';
+
+			$("#replace").replaceWith(myvar);
+		}
 	</script>
 
 </head>
@@ -219,7 +238,7 @@
 					<div class="right-side">
 						<div class="header-widget">
 
-							<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim">登入/註冊</a>
+							<a id="replace"></a>
 							<a href="dashboard-add-listing.html" class="button border with-icon">發布重量
 								<i class="sl sl-icon-plus"></i>
 							</a>
@@ -724,6 +743,13 @@
 	<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/tooltips.min.js"></script>
 	<script type="text/javascript" src="scripts/custom.js"></script>
+
+	<script>
+		var user = sessionStorage.getItem('haveuser');
+		console.log("Current User: " + user);
+		if (user !== null)
+			replace_user_menu_login(user);
+	</script>
 
 	<!-- Maps -->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>

@@ -15,20 +15,6 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 	<script>
-		try {
-			var username = sessionStorage.getItem('haveuser');
-			console.log("Current User: " + username);
-			if (username !== null) {
-				var checkExist = setInterval(function () {
-					if ($('#changename').length) {
-						replace_username(username);
-						clearInterval(checkExist);
-					}
-				}, 100);
-			}
-
-		} catch (err) {}
-
 		var submit_weight = function () {
 			var username = sessionStorage.getItem('haveuser');
 
@@ -151,78 +137,6 @@
 									<a href="teach.html">提供重量</a>
 
 								</li>
-
-
-								<!--
-
-						<li><a href="#">Home</a>
-							<ul>
-								<li><a href="index.html">Home 1</a></li>
-								<li><a href="index-2.html">Home 2</a></li>
-								<li><a href="index-3.html">Home 3</a></li>
-								<li><a href="index-4.html">Home 4</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">Listings</a>
-							<ul>
-								<li><a href="#">List Layout</a>
-									<ul>
-										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
-										<li><a href="listings-list-full-width.html">Full Width</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Grid Layout</a>
-									<ul>
-										<li><a href="listings-grid-with-sidebar-1.html">With Sidebar 1</a></li>
-										<li><a href="listings-grid-with-sidebar-2.html">With Sidebar 2</a></li>
-										<li><a href="listings-grid-full-width.html">Full Width</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Half Screen Map</a>
-									<ul>
-										<li><a href="listings-half-screen-map-list.html">List Layout</a></li>
-										<li><a href="listings-half-screen-map-grid-1.html">Grid Layout 1</a></li>
-										<li><a href="listings-half-screen-map-grid-2.html">Grid Layout 2</a></li>
-									</ul>
-								</li>
-								<li><a href="listings-single-page.html">Single Listing</a></li>
-							</ul>
-						</li>
-
-						<li><a class="current" href="#">User Panel</a>
-							<ul>
-								<li><a href="dashboard.html">Dashboard</a></li>
-								<li><a href="dashboard-messages.html">Messages</a></li>
-								<li><a href="dashboard-bookings.html">Bookings</a></li>
-								<li><a href="dashboard-my-listings.html">My Listings</a></li>
-								<li><a href="dashboard-reviews.html">Reviews</a></li>
-								<li><a href="dashboard-bookmarks.html">Bookmarks</a></li>
-								<li><a href="dashboard-add-listing.html">Add Listing</a></li>
-								<li><a href="dashboard-my-profile.html">My Profile</a></li>
-								<li><a href="dashboard-invoice.html">Invoice</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">Pages</a>
-							<ul>
-								<li><a href="pages-user-profile.html">User Profile</a></li>
-								<li><a href="pages-booking.html">Booking Page</a></li>
-								<li><a href="pages-blog.html">Blog</a>
-									<ul>
-										<li><a href="pages-blog.html">Blog</a></li>
-										<li><a href="pages-blog-post.html">Blog Post</a></li>
-									</ul>
-								</li>
-								<li><a href="pages-contact.html">Contact</a></li>
-								<li><a href="pages-coming-soon.html">Coming Soon</a></li>
-								<li><a href="pages-elements.html">Elements</a></li>
-								<li><a href="pages-pricing-tables.html">Pricing Tables</a></li>
-								<li><a href="pages-typography.html">Typography</a></li>
-								<li><a href="pages-404.html">404 Page</a></li>
-								<li><a href="pages-icons.html">Icons</a></li>
-							</ul>
-						</li>-->
 
 							</ul>
 						</nav>
@@ -848,43 +762,6 @@
 
 										</div>
 
-
-
-										<!-- City 
-								<div class="col-md-6">
-									<h5>City</h5>
-									<select class="chosen-select-no-single" >
-										<option label="blank">Select City</option>	
-										<option>New York</option>
-										<option>Los Angeles</option>
-										<option>Chicago</option>
-										<option>Houston</option>
-										<option>Phoenix</option>
-										<option>San Diego</option>
-										<option>Austin</option>
-									</select>
-								</div>
-
-								
-								<div class="col-md-6">
-									<h5>Address</h5>
-									<input type="text" placeholder="e.g. 964 School Street">
-								</div>
-
-								
-								<div class="col-md-6">
-									<h5>State</h5>
-									<input type="text">
-								</div>
-
-								
-								<div class="col-md-6">
-									<h5>Zip-Code</h5>
-									<input type="text">
-								</div>
-
-								-->
-
 									</div>
 									<!-- Row / End -->
 
@@ -935,6 +812,13 @@
 	<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="scripts/tooltips.min.js"></script>
 	<script type="text/javascript" src="scripts/custom.js"></script>
+
+	<script>
+		var username = sessionStorage.getItem('haveuser');
+		console.log("Current User: " + username);
+		if (username !== null)
+			replace_username(username);
+	</script>
 
 	<!-- Maps -->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
@@ -1022,7 +906,6 @@
 
 	<!-- DropZone | Documentation: http://dropzonejs.com -->
 	<script type="text/javascript" src="scripts/dropzone.js"></script>
-
 
 </body>
 
