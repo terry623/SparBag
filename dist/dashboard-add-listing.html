@@ -87,6 +87,24 @@
 
 			$("#changename").replaceWith(myvar);
 		}
+
+		var get_green_num = function () {
+
+			var username = sessionStorage.getItem('haveuser');
+			axios.post('/api/get_weight', {
+					user: username
+				})
+				.then(function (response) {
+
+					console.log(response.data);
+					if (response.data.length !== 0)
+						$("#green_num").append(response.data.length);
+
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
+		}
 	</script>
 
 </head>
@@ -241,17 +259,17 @@
 							<ul>
 								<li>
 									<a href="dashboard-my-listings.html">已發布
-										<span class="nav-tag green">6</span>
+										<span class="nav-tag green" id="green_num"></span>
 									</a>
 								</li>
 								<li>
 									<a href="dashboard-my-listings.html">待審核
-										<span class="nav-tag yellow">1</span>
+										<!-- <span class="nav-tag yellow">1</span> -->
 									</a>
 								</li>
 								<li>
 									<a href="dashboard-my-listings.html">已過期
-										<span class="nav-tag red">2</span>
+										<!-- <span class="nav-tag red">2</span> -->
 									</a>
 								</li>
 							</ul>
@@ -816,8 +834,10 @@
 	<script>
 		var username = sessionStorage.getItem('haveuser');
 		console.log("Current User: " + username);
-		if (username !== null)
+		if (username !== null) {
 			replace_username(username);
+			get_green_num();
+		}
 	</script>
 
 	<!-- Maps -->
