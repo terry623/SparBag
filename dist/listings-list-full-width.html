@@ -762,7 +762,10 @@
 
 	<script>
 		var session_fly_num = sessionStorage.getItem('fly_num');
+		sessionStorage.removeItem('fly_num');
 		var session_date = sessionStorage.getItem('date');
+		sessionStorage.removeItem('date');
+
 		search_by_num(session_fly_num, session_date);
 	</script>
 

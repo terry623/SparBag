@@ -156,4 +156,28 @@ router.post('/search_by_num', function (req, res, next) {
 
 });
 
+router.post('/search_by_place', function (req, res, next) {
+
+    const {
+        dep,
+        arr,
+        date
+    } = req.body;
+
+    console.log("/ Search By Place /")
+    console.log(req.body);
+
+    weightModel.search_by_place(dep, arr, date).then(result => {
+        if (result.length > 0) {
+            console.log("Success!");
+            res.json(result);
+        } else {
+            const err = new Error('Wrong Get Weight!');
+            err.status = 400;
+            throw err;
+        }
+    }).catch(next);
+
+});
+
 module.exports = router;

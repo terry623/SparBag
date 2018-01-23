@@ -69,8 +69,22 @@ function search_by_num(fly_num, date) {
     });
 }
 
+function search_by_place(dep, arr, date) {
+    const sql = `
+        SELECT *
+        FROM Weights
+        WHERE dep = $<dep> and arr = $<arr> and date = $<date>
+    `;
+    return db.any(sql, {
+        dep,
+        arr,
+        date
+    });
+}
+
 module.exports = {
     store_infor,
     get_weight,
-    search_by_num
+    search_by_num,
+    search_by_place
 };
