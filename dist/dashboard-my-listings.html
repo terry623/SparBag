@@ -32,6 +32,14 @@
 					alert("Something Wrong!");
 				});
 		}
+
+		var replace_username = function (user) {
+			var myvar =
+				'<div class="user-name" id="changename"><span><img src="images/userphoto/person_3.jpg" alt=""></span>' +
+				user + '</div>';
+
+			$("#changename").replaceWith(myvar);
+		}
 	</script>
 
 </head>
@@ -99,7 +107,7 @@
 							<!-- User Menu -->
 							<div class="user-menu">
 								<!--導入使用者大頭照及姓名-->
-								<div class="user-name">
+								<div class="user-name" id="changename">
 									<span>
 										<img src="images/userphoto/person_3.jpg" alt="">
 									</span>Tom Perrin</div>
@@ -188,12 +196,12 @@
 									</a>
 								</li>
 								<li>
-									<a href="dashboard-my-listings.html">待審核
+									<a href="#">待審核
 										<!-- <span class="nav-tag yellow">1</span> -->
 									</a>
 								</li>
 								<li>
-									<a href="dashboard-my-listings.html">已過期
+									<a href="#">已過期
 										<!-- <span class="nav-tag red">2</span> -->
 									</a>
 								</li>
@@ -314,6 +322,7 @@
 		var username = sessionStorage.getItem('haveuser');
 		console.log("Current User: " + username);
 		if (username !== null) {
+			replace_username(username);
 			get_green_num();
 		}
 
@@ -412,7 +421,7 @@
 								<a href="dashboard-run-listings.html" class="button gray"> &nbsp; &nbsp; \
 									<i class="sl sl-icon-list"></i> &nbsp;查看訂單資訊 &nbsp; &nbsp;</a> \
 								<br> \
-								<a href="dashboard-edit-listing.html" class="button gray"> \
+								<a href="#" class="button gray"> \
 									<i class="sl sl-icon-note"></i> 編輯</a> \
 								<a href="#" class="button gray"> \
 									<i class="sl sl-icon-close"></i> 刪除</a> \
