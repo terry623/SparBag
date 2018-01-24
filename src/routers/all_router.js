@@ -180,4 +180,20 @@ router.post('/search_by_place', function (req, res, next) {
 
 });
 
+router.post('/search_by_id', function (req, res, next) {
+
+    const {
+        id
+    } = req.body;
+
+    console.log("/ Search By Id /")
+    console.log(req.body);
+
+    weightModel.search_by_id(id).then(result => {
+        console.log("Success!");
+        res.json(result);
+    }).catch(next);
+
+});
+
 module.exports = router;

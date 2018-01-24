@@ -82,9 +82,21 @@ function search_by_place(dep, arr, date) {
     });
 }
 
+function search_by_id(id) {
+    const sql = `
+        SELECT *
+        FROM Weights
+        WHERE id = $<id>
+    `;
+    return db.one(sql, {
+        id
+    });
+}
+
 module.exports = {
     store_infor,
     get_weight,
     search_by_num,
-    search_by_place
+    search_by_place,
+    search_by_id
 };

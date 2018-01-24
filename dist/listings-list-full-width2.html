@@ -34,41 +34,43 @@
 
 						var text =
 							'<div class="col-lg-12 col-md-12"> \
-						<div class="listing-item-container list-layout"> \
-							<a href="listings-single-page.html" class="listing-item"> \
-								<div class="listing-item-image"> \
-									<img src="images/userphoto/person_1.jpg" alt=""> \
-									<span class="tag">' +
+							<div class="listing-item-container list-layout"> \
+								<a id="' +
+							val.id +
+							'" class="listing-item" onClick="go_page(this.id)"> \
+									<div class="listing-item-image"> \
+										<img src="images/userphoto/person_1.jpg" alt=""> \
+										<span class="tag">' +
 							val.money_type + ' ' + val.money +
 							'/公斤</span> \
-								</div> \
-								<div class="listing-item-content"> \
-									<div class="listing-item-inner"> \
-										<h3>' +
+									</div> \
+									<div class="listing-item-content"> \
+										<div class="listing-item-inner"> \
+											<h3>' +
 							val.company + '</h3> \
-										<span> ' + val.fly_1 +
+											<span> ' + val.fly_1 +
 							'</span> \
-										<br> \
-										<div class="star-rating" data-rating="3.5"></div> \
-										<br> \
-										<h3>' +
+											<br> \
+											<div class="star-rating" data-rating="3.5"></div> \
+											<br> \
+											<h3>' +
 							val.dep + '&nbsp; \
-											<i style="color: #7ccad3" class="im im-icon-Arrow-Right"></i>&nbsp;' + val.arr +
+												<i style="color: #7ccad3" class="im im-icon-Arrow-Right"></i>&nbsp;' + val.arr +
 							'&nbsp;</h3> \
-										<span class="like-icon"></span> \
-									</div> \
-									<div class="listing-item-details"> \
-										<h1 style="text-align: right; color: #7ccad3">' +
+											<span class="like-icon"></span> \
+										</div> \
+										<div class="listing-item-details"> \
+											<h1 style="text-align: right; color: #7ccad3">' +
 							val.kg + 'kg</h1> \
-										<br> \
-									</div> \
-									<div class="listing-item-details">' + val
+											<br> \
+										</div> \
+										<div class="listing-item-details">' + val
 							.date +
 							'</div> \
-								</div> \
-							</a> \
-						</div> \
-					</div>';
+									</div> \
+								</a> \
+							</div> \
+						</div>';
 
 						$("#list_item").append(text);
 					});
@@ -97,6 +99,12 @@
 
 			$("#replace").replaceWith(myvar);
 		}
+
+		var go_page = function (id) {
+			sessionStorage.setItem('id', id);
+			location.href = "listings-single-page.html";
+		}
+
 	</script>
 
 
@@ -148,77 +156,6 @@
 
 								</li>
 
-
-								<!--
-						<li><a class="current" href="#">Home</a>
-							<ul>
-								<li><a href="index.html">Home 1</a></li>
-								<li><a href="index-2.html">Home 2</a></li>
-								<li><a href="index-3.html">Home 3</a></li>
-								<li><a href="index-4.html">Home 4</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">Listings</a>
-							<ul>
-								<li><a href="#">List Layout</a>
-									<ul>
-										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
-										<li><a href="listings-list-full-width.html">Full Width</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Grid Layout</a>
-									<ul>
-										<li><a href="listings-grid-with-sidebar-1.html">With Sidebar 1</a></li>
-										<li><a href="listings-grid-with-sidebar-2.html">With Sidebar 2</a></li>
-										<li><a href="listings-grid-full-width.html">Full Width</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Half Screen Map</a>
-									<ul>
-										<li><a href="listings-half-screen-map-list.html">List Layout</a></li>
-										<li><a href="listings-half-screen-map-grid-1.html">Grid Layout 1</a></li>
-										<li><a href="listings-half-screen-map-grid-2.html">Grid Layout 2</a></li>
-									</ul>
-								</li>
-								<li><a href="listings-single-page.html">Single Listing</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">User Panel</a>
-							<ul>
-								<li><a href="dashboard.html">Dashboard</a></li>
-								<li><a href="dashboard-messages.html">Messages</a></li>
-								<li><a href="dashboard-bookings.html">Bookings</a></li>
-								<li><a href="dashboard-my-listings.html">My Listings</a></li>
-								<li><a href="dashboard-reviews.html">Reviews</a></li>
-								<li><a href="dashboard-bookmarks.html">Bookmarks</a></li>
-								<li><a href="dashboard-add-listing.html">Add Listing</a></li>
-								<li><a href="dashboard-my-profile.html">My Profile</a></li>
-								<li><a href="dashboard-invoice.html">Invoice</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">Pages</a>
-							<ul>
-								<li><a href="pages-user-profile.html">User Profile</a></li>
-								<li><a href="pages-booking.html">Booking Page</a></li>
-								<li><a href="pages-blog.html">Blog</a>
-									<ul>
-										<li><a href="pages-blog.html">Blog</a></li>
-										<li><a href="pages-blog-post.html">Blog Post</a></li>
-									</ul>
-								</li>
-								<li><a href="pages-contact.html">Contact</a></li>
-								<li><a href="pages-coming-soon.html">Coming Soon</a></li>
-								<li><a href="pages-elements.html">Elements</a></li>
-								<li><a href="pages-pricing-tables.html">Pricing Tables</a></li>
-								<li><a href="pages-typography.html">Typography</a></li>
-								<li><a href="pages-404.html">404 Page</a></li>
-								<li><a href="pages-icons.html">Icons</a></li>
-							</ul>
-						</li>
-					-->
 							</ul>
 						</nav>
 						<div class="clearfix"></div>
