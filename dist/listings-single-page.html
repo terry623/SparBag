@@ -14,6 +14,32 @@
 	<link rel="stylesheet" href="css/colors/main.css" id="colors">
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+	<script>
+		var replace_user_menu_login = function (user) {
+
+			var myvar =
+				'<div class="user-menu"> \
+					<div class="user-name"><span><img src="images/userphoto/person_3.jpg" alt=""></span>' +
+				user +
+				'</div> \
+					<ul> \
+						<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> 我的航程</a></li> \
+						<li><a href="dashboard-messages.html"><i class="sl sl-icon-bell"></i> 通知</a></li> \
+						<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> 預約託運</a></li> \
+						<li><a href="dashboard-my-listings.html"><i class="sl sl-icon-layers"></i> 我的重量</a></li> \
+						<li><a id="logout" onclick="logout()"><i class="sl sl-icon-power"></i> 登出</a></li> \
+					</ul> \
+				</div>';
+
+			$("#replace").replaceWith(myvar);
+		}
+
+		var pass_time_kg = function () {
+			sessionStorage.setItem('time', $("#booking-time").val());
+			sessionStorage.setItem('kg', $("#input_kg").val());
+			location.href = "pages-booking.html";
+		}
+	</script>
 </head>
 
 <body>
@@ -73,14 +99,13 @@
 					<div class="right-side">
 						<div class="header-widget">
 
-							<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim">登入/註冊</a>
+							<a href="#" class="sign-in popup-with-zoom-anim" id="replace">登入/註冊</a>
 							<a href="dashboard-add-listing.html" class="button border with-icon">發布重量
 								<i class="sl sl-icon-plus"></i>
 							</a>
 						</div>
 					</div>
 					<!-- Right Side Content / End -->
-
 
 					<!-- Sign In Popup -->
 					<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
@@ -128,12 +153,6 @@
 											<div style="text-align: center;">
 												<input type="submit" class="button border margin-top-5" name="login" value="登入" />
 											</div>
-											<!--	
-									<div class="checkboxes margin-top-10">
-										<input id="remember-me" type="checkbox" name="check">
-										<label for="remember-me">Remember Me</label>
-									</div>
-								-->
 										</div>
 
 									</form>
@@ -164,14 +183,7 @@
 												<input class="input-text" type="password" name="password1" id="password1" />
 											</label>
 										</p>
-										<!--
-							<p class="form-row form-row-wide">
-								<label for="password2">密碼驗證:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password2" id="password2"/>
-								</label>
-							</p>
-                        -->
+
 										<p class="form-row form-row-wide">
 											<label for="passportnumber">護照號碼:
 												<i class="im im-icon-Plane"></i>
@@ -197,18 +209,6 @@
 		</header>
 		<div class="clearfix"></div>
 		<!-- Header Container / End -->
-
-
-		<!-- Slider
-================================================== -->
-		<!--
-<div class="listing-slider mfp-gallery-container margin-bottom-0">
-	<a href="images/single-listing-01.jpg" data-background-image="images/single-listing-01.jpg" class="item mfp-gallery" title="Title 1"></a>
-	<a href="images/single-listing-02.jpg" data-background-image="images/single-listing-02.jpg" class="item mfp-gallery" title="Title 3"></a>
-	<a href="images/single-listing-03.jpg" data-background-image="images/single-listing-03.jpg" class="item mfp-gallery" title="Title 2"></a>
-	<a href="images/single-listing-04.jpg" data-background-image="images/single-listing-04.jpg" class="item mfp-gallery" title="Title 4"></a>
-</div>
--->
 
 		<!-- Content
 ================================================== -->
@@ -329,7 +329,7 @@
 
 						<!-- Description -->
 
-						<p> 
+						<p>
 							Not yet.
 						</p>
 					</div>
@@ -549,7 +549,7 @@
 										<!-- Quantity Buttons -->
 										<div class="qtyButtons">
 											<div class="qtyTitle">選擇重量</div>
-											<input type="text" name="qtyInput" value="1">
+											<input type="text" name="qtyInput" value="1" id="input_kg">
 										</div>
 
 									</div>
@@ -561,7 +561,7 @@
 						<br>
 
 						<!-- progress button animation handled via custom.js -->
-						<a href="pages-booking.html" class="button book-now fullwidth margin-top-5">預 約</a>
+						<a class="button book-now fullwidth margin-top-5" onClick="pass_time_kg()">預 約</a>
 					</div>
 					<!-- Book Now / End -->
 					<!-- Share / Like -->
@@ -667,9 +667,6 @@
 									<i class="icon-youtube"></i>
 								</a>
 							</li>
-							<!--
-					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-					<li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>-->
 						</ul>
 
 					</div>
@@ -749,35 +746,43 @@
 	<script type="text/javascript" src="scripts/custom.js"></script>
 
 	<script>
+		var user = sessionStorage.getItem('haveuser');
+		console.log("Current User: " + user);
+		if (user !== null) {
+			replace_user_menu_login(user);
+		}
+	</script>
+
+	<script>
 		var id = sessionStorage.getItem('id');
 		console.log("Current id: " + id);
 		if (id !== null) {
 			axios.post('/api/search_by_id', {
-				id: id
-			})
-			.then(function (response) {
-				console.log(response.data);
+					id: id
+				})
+				.then(function (response) {
+					console.log(response.data);
 
-				var dep = response.data.dep +
-						 '<i style="color: #7ccad3" class="im im-icon-Arrow-Right2"></i>';
-						 
-				var arr = response.data.arr +
+					var dep = response.data.dep +
+						'<i style="color: #7ccad3" class="im im-icon-Arrow-Right2"></i>';
+
+					var arr = response.data.arr +
 						'<i style="color: #7ccad3"></i>';
 
-				$("#dep").append(dep);
-				$("#arr").append(arr);
-				$("#fly_num").text(response.data.fly_1);
-				$("#date").text(response.data.date);
-				$("#time").text(response.data.date + " " + response.data.meet_start + "~" + response.data.meet_end);
-				$("#place").text(response.data.meet_place);
-				$("#money").text("$" + response.data.money);
-				$("#poster").text(response.data.username);
-				$("#kg").text(response.data.kg);
-				 
-			})
-			.catch(function (error) {
-				alert("Something Wrong!");
-			});
+					$("#dep").append(dep);
+					$("#arr").append(arr);
+					$("#fly_num").text(response.data.fly_1);
+					$("#date").text(response.data.date);
+					$("#time").text(response.data.date + " " + response.data.meet_start + "~" + response.data.meet_end);
+					$("#place").text(response.data.meet_place);
+					$("#money").text("$" + response.data.money);
+					$("#poster").text(response.data.username);
+					$("#kg").text(response.data.kg);
+
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
 		}
 	</script>
 
@@ -822,9 +827,7 @@
 ================================================== -->
 	<script src="scripts/switcher.js"></script>
 
-
 	<!-- Style Switcher / End -->
-
 
 </body>
 

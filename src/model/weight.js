@@ -57,12 +57,23 @@ function get_weight(username) {
 }
 
 function search_by_num(fly_num, date) {
-    const sql = `
-        SELECT *
-        FROM Weights
-        WHERE (fly_1 = $<fly_num> or fly_2 = $<fly_num> or fly_3 = $<fly_num>)
-        and date = $<date>
-    `;
+
+    var sql;
+    if (fly_num == "") {
+        sql = `
+            SELECT *
+            FROM Weights
+            WHERE date = $<date>
+        `;
+    } else {
+        sql = `
+            SELECT *
+            FROM Weights
+            WHERE (fly_1 = $<fly_num> or fly_2 = $<fly_num> or fly_3 = $<fly_num>)
+            and date = $<date>
+        `;
+    }
+
     return db.any(sql, {
         fly_num,
         date
@@ -70,11 +81,21 @@ function search_by_num(fly_num, date) {
 }
 
 function search_by_place(dep, arr, date) {
-    const sql = `
+
+    var sql;
+    if (dep == '' || arr == '') {
+        sql = `
+        SELECT *
+        FROM Weights
+        WHERE date = $<date>
+    `;
+    } else {
+        sql = `
         SELECT *
         FROM Weights
         WHERE dep = $<dep> and arr = $<arr> and date = $<date>
     `;
+    }
     return db.any(sql, {
         dep,
         arr,

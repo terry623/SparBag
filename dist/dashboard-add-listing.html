@@ -36,23 +36,23 @@
 				}
 			}
 
-			console.log(
-				username,
-				$("#select_weight :selected").text().substring(0, 1),
-				$("#select_departure :selected").text(),
-				$("#select_arrive :selected").text(),
-				way,
-				$("#flight_1").val(),
-				$("#flight_2").val(),
-				$("#flight_3").val(),
-				$("#company").val(),
-				$("#booking-date").val(),
-				$("#meet_start_time :selected").text(),
-				$("#meet_end_time :selected").text(),
-				$("#meet_place :selected").text(),
-				$("#money_type :selected").text(),
-				$("#money").val()
-			)
+			// console.log(
+			// 	username,
+			// 	$("#select_weight :selected").text().substring(0, 1),
+			// 	$("#select_departure :selected").text(),
+			// 	$("#select_arrive :selected").text(),
+			// 	way,
+			// 	$("#flight_1").val(),
+			// 	$("#flight_2").val(),
+			// 	$("#flight_3").val(),
+			// 	$("#company").val(),
+			// 	$("#booking-date").val(),
+			// 	$("#meet_start_time :selected").text(),
+			// 	$("#meet_end_time :selected").text(),
+			// 	$("#meet_place :selected").text(),
+			// 	$("#money_type :selected").text(),
+			// 	$("#money").val()
+			// )
 
 			axios.post('/api/submit_weight', {
 					user: username,

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const signupModel = require('../model/signup.js');
 const loginModel = require('../model/login.js');
 const weightModel = require('../model/weight.js');
+const reserveModel = require('../model/reserve.js');
 const otherModel = require('../model/other.js');
 const router = express.Router();
 router.use(bodyParser.json());
@@ -190,6 +191,24 @@ router.post('/search_by_id', function (req, res, next) {
     console.log(req.body);
 
     weightModel.search_by_id(id).then(result => {
+        console.log("Success!");
+        res.json(result);
+    }).catch(next);
+
+});
+
+router.post('/store_relation', function (req, res, next) {
+
+    const {
+        lend,
+        borrow,
+        weight_id
+    } = req.body;
+
+    console.log("/ Store Relation /")
+    console.log(req.body);
+
+    reserveModel.store_relation(lend, borrow, weight_id).then(result => {
         console.log("Success!");
         res.json(result);
     }).catch(next);

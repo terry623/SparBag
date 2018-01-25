@@ -797,7 +797,7 @@
 		var session_fly_num = sessionStorage.getItem('fly_num');
 		var session_date = sessionStorage.getItem('date');
 
-		if (session_fly_num !== null || session_date !== null) {
+		if (session_fly_num !== null && session_date !== null) {
 			sessionStorage.removeItem('fly_num');
 			sessionStorage.removeItem('date');
 			search_by_num(session_fly_num, session_date);

@@ -5,6 +5,7 @@ const db = pgp(process.env.DB_URL);
 const schemaSql = `
     DROP TABLE IF EXISTS Users;
     DROP TABLE IF EXISTS Weights;
+    DROP TABLE IF EXISTS Reserve;
 
     CREATE TABLE Users (
         id              serial PRIMARY KEY NOT NULL,
@@ -31,6 +32,14 @@ const schemaSql = `
         "meet_place"    varchar(30) NOT NULL,
         "money_type"    varchar(30) NOT NULL,
         "money"         integer
+    );
+
+    CREATE TABLE Reserve (
+        id              serial PRIMARY KEY NOT NULL,
+        "weight_id"      varchar(30) NOT NULL,
+        "lend"           varchar(30) NOT NULL,
+        "borrow"         varchar(30) NOT NULL,
+        "remain"         integer     DEFAULT 0
     );
 
     INSERT INTO Users (username, email, password, passportnumber) VALUES
