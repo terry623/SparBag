@@ -31,21 +31,22 @@ const schemaSql = `
         "meet_end"      varchar(30) NOT NULL,
         "meet_place"    varchar(30) NOT NULL,
         "money_type"    varchar(30) NOT NULL,
-        "money"         integer
+        "money"         integer,
+        "remain_kg"     integer
     );
 
     CREATE TABLE Reserve (
         id              serial PRIMARY KEY NOT NULL,
-        "weight_id"      varchar(30) NOT NULL,
+        "weight_id"      integer,
         "lend"           varchar(30) NOT NULL,
         "borrow"         varchar(30) NOT NULL,
-        "remain"         integer     DEFAULT 0
+        "ask_time"       varchar(30) NOT NULL,
+        "ask_kg"         integer
     );
 
     INSERT INTO Users (username, email, password, passportnumber) VALUES
     ('111', '111@gmail.com', '111', 'xxx'),
-    ('222', '222@gmail.com', '222', 'xxx'),
-    ('333', '333@gmail.com', '333', 'xxx');
+    ('222', '222@gmail.com', '222', 'xxx');
 
 `;
 

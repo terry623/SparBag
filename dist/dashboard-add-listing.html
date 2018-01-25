@@ -69,7 +69,8 @@
 					meet_end_time: $("#meet_end_time :selected").text(),
 					meet_place: $("#meet_place :selected").text(),
 					money_type: $("#money_type :selected").text(),
-					money: $("#money").val()
+					money: $("#money").val(),
+					remain_kg: $("#select_weight :selected").text().substring(0, 1)
 				})
 				.then(function (response) {
 					location.href = "dashboard-my-listings.html";
@@ -89,17 +90,15 @@
 		}
 
 		var get_green_num = function () {
-
 			var username = sessionStorage.getItem('haveuser');
 			axios.post('/api/get_weight', {
 					user: username
 				})
 				.then(function (response) {
-
-					console.log(response.data);
-					if (response.data.length !== 0)
-						$("#green_num").append(response.data.length);
-
+					console.log(response);
+					if (response.length > 0)
+						if (response.data.length !== 0)
+							$("#green_num").append(response.data.length);
 				})
 				.catch(function (error) {
 					alert("Something Wrong!");

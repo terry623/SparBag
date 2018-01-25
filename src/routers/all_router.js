@@ -83,7 +83,8 @@ router.post('/submit_weight', function (req, res, next) {
         meet_end_time,
         meet_place,
         money_type,
-        money
+        money,
+        remain_kg
     } = req.body;
 
     console.log("/ Submit Weight /");
@@ -104,7 +105,8 @@ router.post('/submit_weight', function (req, res, next) {
         meet_end_time,
         meet_place,
         money_type,
-        money
+        money,
+        remain_kg
     ).then(infor => {
         console.log("Success!");
         res.json(infor);
@@ -122,14 +124,8 @@ router.post('/get_weight', function (req, res, next) {
     console.log(req.body);
 
     weightModel.get_weight(user).then(result => {
-        if (result.length > 0) {
-            console.log("Success!");
-            res.json(result);
-        } else {
-            const err = new Error('Wrong Get Weight!');
-            err.status = 400;
-            throw err;
-        }
+        console.log("Success!");
+        res.json(result);
     }).catch(next);
 
 });
@@ -200,17 +196,45 @@ router.post('/search_by_id', function (req, res, next) {
 router.post('/store_relation', function (req, res, next) {
 
     const {
+        weight_id,
         lend,
         borrow,
-        weight_id
+        ask_time,
+        ask_kg
     } = req.body;
 
     console.log("/ Store Relation /")
     console.log(req.body);
 
-    reserveModel.store_relation(lend, borrow, weight_id).then(result => {
-        console.log("Success!");
-        res.json(result);
+    reserveModel.store_relation(weight_id, lend, borrow, ask_time, ask_kg).then(result => {
+        weightModel.search_by_id(weight_id).then(infor => {
+            weightModel.update_remain_kg(infor.id, infor.remain_kg, ask_kg).then(infor => {
+                console.log("Success!");
+                res.json(infor);
+            }).catch(next);
+        }).catch(next);
+    }).catch(next);
+
+});
+
+router.post('/search_reserve', function (req, res, next) {
+
+    const {
+        lend,
+        borrow,
+        weight_id
+    } = req.body;
+
+    console.log("/ Search Reserve /")
+    console.log(req.body);
+
+    reserveModel.search_reserve(lend, borrow, weight_id).then(result => {
+        if (result.length > 0) {
+            console.log("Success!");
+            res.json(result);
+        } else {
+            res.json(0);
+        }
     }).catch(next);
 
 });

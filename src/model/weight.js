@@ -18,12 +18,13 @@ function store_infor(
     meet_end,
     meet_place,
     money_type,
-    money
+    money,
+    remain_kg
 ) {
     const sql = `
         INSERT INTO Weights ($<this:name>)
         VALUES ($<username>, $<kg>, $<dep>, $<arr>, $<fly_way>, $<fly_1>, $<fly_2>, $<fly_3>,
-             $<company>, $<date>, $<meet_start>, $<meet_end>, $<meet_place>, $<money_type>, $<money>)
+             $<company>, $<date>, $<meet_start>, $<meet_end>, $<meet_place>, $<money_type>, $<money>, $<remain_kg>)
         RETURNING *
     `;
     return db.one(sql, {
@@ -41,7 +42,8 @@ function store_infor(
         meet_end,
         meet_place,
         money_type,
-        money
+        money,
+        remain_kg
     });
 }
 
@@ -114,10 +116,25 @@ function search_by_id(id) {
     });
 }
 
+function update_remain_kg(id, remain_kg, ask_kg) {
+    const sql = `
+        UPDATE Weights
+        SET remain_kg = $<result_kg>
+        WHERE id = $<id>
+        RETURNING *
+    `;
+    var result_kg = remain_kg - ask_kg;
+    return db.one(sql, {
+        id,
+        result_kg
+    });
+}
+
 module.exports = {
     store_infor,
     get_weight,
     search_by_num,
     search_by_place,
-    search_by_id
+    search_by_id,
+    update_remain_kg
 };
