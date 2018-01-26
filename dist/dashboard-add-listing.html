@@ -95,8 +95,8 @@
 					user: username
 				})
 				.then(function (response) {
-					console.log(response);
-					if (response.length > 0)
+					console.log(responsed);
+					if (response.data !== undefined)
 						if (response.data.length !== 0)
 							$("#green_num").append(response.data.length);
 				})

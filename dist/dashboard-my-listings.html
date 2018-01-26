@@ -45,6 +45,11 @@
 			sessionStorage.removeItem('haveuser');
 			location.href = "index.html";
 		}
+
+		var pass_id = function (id) {
+			sessionStorage.setItem('weight_id', id);
+			location.href = "dashboard-run-listings.html";
+		}
 	</script>
 
 </head>
@@ -423,7 +428,7 @@
 								</div> \
 							</div> \
 							<div class="buttons-to-right"> \
-								<a href="dashboard-run-listings.html" class="button gray"> &nbsp; &nbsp; \
+								<a id="' + val.id + '" class="button gray" onClick="pass_id(this.id)"> &nbsp; &nbsp; \
 									<i class="sl sl-icon-list"></i> &nbsp;查看訂單資訊 &nbsp; &nbsp;</a> \
 								<br> \
 								<a href="#" class="button gray"> \

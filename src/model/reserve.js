@@ -32,7 +32,20 @@ function search_reserve(lend, borrow, weight_id) {
     });
 }
 
+function search_reserve_by_weight_id(weight_id) {
+
+    const sql = `
+        SELECT *
+        FROM Reserve
+        WHERE weight_id = $<weight_id>
+    `;
+    return db.any(sql, {
+        weight_id
+    });
+}
+
 module.exports = {
     store_relation,
-    search_reserve
+    search_reserve,
+    search_reserve_by_weight_id
 };

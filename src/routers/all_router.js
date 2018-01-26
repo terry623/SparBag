@@ -239,4 +239,24 @@ router.post('/search_reserve', function (req, res, next) {
 
 });
 
+router.post('/search_reserve_by_weight_id', function (req, res, next) {
+
+    const {
+        id
+    } = req.body;
+
+    console.log("/ Search Reserve By Weight ID /")
+    console.log(req.body);
+
+    reserveModel.search_reserve_by_weight_id(id).then(result => {
+        if (result.length > 0) {
+            console.log("Success!");
+            res.json(result);
+        } else {
+            res.json(0);
+        }
+    }).catch(next);
+
+});
+
 module.exports = router;
