@@ -95,10 +95,11 @@
 					user: username
 				})
 				.then(function (response) {
-					console.log(responsed);
-					if (response.data !== undefined)
+					console.log(response);
+					if (response.data !== undefined) {
 						if (response.data.length !== 0)
 							$("#green_num").append(response.data.length);
+					}
 				})
 				.catch(function (error) {
 					alert("Something Wrong!");

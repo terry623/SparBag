@@ -44,8 +44,21 @@ function search_reserve_by_weight_id(weight_id) {
     });
 }
 
+function search_reserve_by_borrow(borrow) {
+
+    const sql = `
+        SELECT *
+        FROM Weights a, Reserve b
+        where b.borrow = $<borrow> and a.id = b.weight_id
+    `;
+    return db.any(sql, {
+        borrow
+    });
+}
+
 module.exports = {
     store_relation,
     search_reserve,
-    search_reserve_by_weight_id
+    search_reserve_by_weight_id,
+    search_reserve_by_borrow
 };
