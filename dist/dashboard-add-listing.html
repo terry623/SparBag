@@ -104,6 +104,11 @@
 					alert("Something Wrong!");
 				});
 		}
+
+		var logout = function () {
+			sessionStorage.removeItem('haveuser');
+			location.href = "index.html";
+		}
 	</script>
 
 </head>
@@ -195,7 +200,7 @@
 											<i class="sl sl-icon-layers"></i> 我的重量</a>
 									</li>
 									<li>
-										<a href="index.html">
+										<a onClick="logout()">
 											<i class="sl sl-icon-power"></i> 登出</a>
 									</li>
 								</ul>
@@ -305,7 +310,7 @@
 								<i class="sl sl-icon-credit-card"></i> 付款設置</a>
 						</li>
 						<li>
-							<a href="index.html">
+							<a onClick="logout()">
 								<i class="sl sl-icon-power"></i> 登出</a>
 						</li>
 					</ul>

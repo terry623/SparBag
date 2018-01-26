@@ -44,6 +44,11 @@
 				});
 			location.href = "pages-booking-confirmation.html";
 		}
+
+		var logout = function () {
+			sessionStorage.removeItem('haveuser');
+			location.href = "index.html";
+		}
 	</script>
 </head>
 
@@ -129,7 +134,7 @@
 											<i class="fa fa-calendar-check-o"></i> 預約託運</a>
 									</li>
 									<li>
-										<a href="index.html">
+										<a onClick="logout()">
 											<i class="sl sl-icon-power"></i> 登出</a>
 									</li>
 								</ul>

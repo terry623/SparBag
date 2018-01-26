@@ -111,6 +111,11 @@
 			sessionStorage.setItem('id', id);
 			location.href = "listings-single-page.html";
 		}
+
+		var logout = function () {
+			sessionStorage.removeItem('haveuser');
+			location.href = "index.html";
+		}
 	</script>
 
 </head>
