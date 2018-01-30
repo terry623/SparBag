@@ -69,7 +69,8 @@
 				})
 				.then(function (response) {
 					console.log(response);
-					// location.reload();
+					sessionStorage.setItem('reload', 'true');
+					location.reload();
 				})
 				.catch(function (error) {
 					alert("Something Wrong!");
