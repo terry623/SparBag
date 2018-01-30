@@ -130,11 +130,24 @@ function update_remain_kg(id, remain_kg, ask_kg) {
     });
 }
 
+function delete_weight_by_id(id) {
+    const sql = `
+        DELETE
+        FROM Weights
+        WHERE id = $<id>
+        RETURNING *
+    `;
+    return db.one(sql, {
+        id
+    });
+}
+
 module.exports = {
     store_infor,
     get_weight,
     search_by_num,
     search_by_place,
     search_by_id,
-    update_remain_kg
+    update_remain_kg,
+    delete_weight_by_id
 };

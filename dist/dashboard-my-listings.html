@@ -50,6 +50,19 @@
 			sessionStorage.setItem('weight_id', id);
 			location.href = "dashboard-run-listings.html";
 		}
+
+		var delete_item = function (id) {
+			axios.post('/api/delete_weight_by_id', {
+					id: id
+				})
+				.then(function (response) {
+					console.log(response);
+					location.reload();
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
+		}
 	</script>
 
 </head>
@@ -428,12 +441,16 @@
 								</div> \
 							</div> \
 							<div class="buttons-to-right"> \
-								<a id="' + val.id + '" class="button gray" onClick="pass_id(this.id)"> &nbsp; &nbsp; \
+								<a id="' +
+						val.id +
+						'" class="button gray" onClick="pass_id(this.id)"> &nbsp; &nbsp; \
 									<i class="sl sl-icon-list"></i> &nbsp;查看訂單資訊 &nbsp; &nbsp;</a> \
 								<br> \
 								<a href="#" class="button gray"> \
 									<i class="sl sl-icon-note"></i> 編輯</a> \
-								<a href="#" class="button gray"> \
+								<a id="' +
+						val.id +
+						'"class="button gray" onClick="delete_item(this.id)"> \
 									<i class="sl sl-icon-close"></i> 刪除</a> \
 							</div> \
 						</li>';

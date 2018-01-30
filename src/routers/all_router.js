@@ -263,6 +263,22 @@ router.post('/search_by_id', function (req, res, next) {
 
 });
 
+router.post('/delete_weight_by_id', function (req, res, next) {
+
+    const {
+        id
+    } = req.body;
+
+    console.log("/ Delete By Id /")
+    console.log(req.body);
+
+    weightModel.delete_weight_by_id(id).then(result => {
+        console.log("Success!");
+        res.json(result);
+    }).catch(next);
+
+});
+
 router.post('/store_relation', function (req, res, next) {
 
     const {
