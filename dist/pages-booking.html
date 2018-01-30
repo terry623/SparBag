@@ -24,25 +24,27 @@
 		}
 
 		var confirm = function () {
-			var username = sessionStorage.getItem('haveuser');
-			var temp_lend = sessionStorage.getItem('temp_lend');
-			var get_time = sessionStorage.getItem('time');
-			var get_kg = sessionStorage.getItem('kg');
+			if ($('#check-a').prop('checked')) {
+				var username = sessionStorage.getItem('haveuser');
+				var temp_lend = sessionStorage.getItem('temp_lend');
+				var get_time = sessionStorage.getItem('time');
+				var get_kg = sessionStorage.getItem('kg');
 
-			axios.post('/api/store_relation', {
-					weight_id: sessionStorage.getItem('id'),
-					lend: temp_lend,
-					borrow: username,
-					ask_time: get_time,
-					ask_kg: get_kg
-				})
-				.then(function (response) {
-					console.log(response);
-				})
-				.catch(function (error) {
-					alert("Something Wrong!");
-				});
-			location.href = "pages-booking-confirmation.html";
+				axios.post('/api/store_relation', {
+						weight_id: sessionStorage.getItem('id'),
+						lend: temp_lend,
+						borrow: username,
+						ask_time: get_time,
+						ask_kg: get_kg
+					})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						alert("Something Wrong!");
+					});
+				location.href = "pages-booking-confirmation.html";
+			}
 		}
 
 		var logout = function () {
