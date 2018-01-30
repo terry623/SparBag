@@ -66,6 +66,42 @@ router.post('/login', function (req, res, next) {
 
 });
 
+router.post('/store_article', function (req, res, next) {
+
+    const {
+        about_me,
+        check_item,
+        rule_1,
+        rule_2,
+        username
+    } = req.body;
+
+    console.log("/ Store Article /");
+    console.log(req.body);
+
+    signupModel.store_article(about_me, check_item, rule_1, rule_2, username).then(infor => {
+        console.log("Success!");
+        res.json(infor);
+    }).catch(next);
+
+}); 
+
+router.post('/load_article', function (req, res, next) {
+
+    const {
+        username
+    } = req.body;
+
+    console.log("/ Load Article /");
+    console.log(req.body);
+
+    signupModel.check_username(username).then(infor => {
+        console.log("Success!");
+        res.json(infor);
+    }).catch(next);
+
+}); 
+
 router.post('/submit_weight', function (req, res, next) {
 
     const {

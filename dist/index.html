@@ -22,6 +22,8 @@
 					password: $("#password").val()
 				})
 				.then(function (response) {
+					console.log("User information");
+					console.log(response);
 					var user = $("#username").val();
 					sessionStorage.setItem('haveuser', user);
 					location.reload();

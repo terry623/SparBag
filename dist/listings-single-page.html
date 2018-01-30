@@ -284,8 +284,7 @@
 
 						<!-- Description -->
 
-						<p>
-							Not yet.
+						<p id="self">
 						</p>
 
 					</div>
@@ -317,8 +316,7 @@
 						<h3 class="listing-desc-headline" style="display: inline;">物品查看:</h3>
 
 
-						<h4 style="display: inline;color: #7ccad3">
-							需要
+						<h4 style="display: inline;color: #7ccad3" id="check_item">
 						</h4>
 
 
@@ -329,8 +327,7 @@
 
 						<!-- Description -->
 
-						<p>
-							Not yet.
+						<p id="rule">
 						</p>
 					</div>
 
@@ -791,6 +788,23 @@
 								console.log("Nobody change the kg.");
 
 							$("#kg").text(temp_remain_kg);
+
+							axios.post('/api/load_article', {
+									username: user
+								})
+								.then(function (response) {
+									$("#self").text(response.data[0].about_me);
+									$("#rule").text(response.data[0].rule_1);
+
+									if (response.data[0].check_item == true)
+										$("#check_item").text("需要");
+									else
+										$("#check_item").text("不需要");
+
+								})
+								.catch(function (error) {
+									alert("Something Wrong!");
+								});
 						})
 						.catch(function (error) {
 							alert("Something Wrong!");

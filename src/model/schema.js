@@ -8,11 +8,15 @@ const schemaSql = `
     DROP TABLE IF EXISTS Reserve;
 
     CREATE TABLE Users (
-        id              serial PRIMARY KEY NOT NULL,
-        "username"      varchar(30) NOT NULL,
-        "email"         varchar(30) NOT NULL,
-        "password"      varchar(30) NOT NULL,
-        "passportnumber" varchar(30) NOT NULL
+        id               serial PRIMARY KEY NOT NULL,
+        "username"       varchar(30) NOT NULL,
+        "email"          varchar(30) NOT NULL,
+        "password"       varchar(30) NOT NULL,
+        "passportnumber" varchar(30) NOT NULL,
+        "about_me"       varchar(5000),
+        "check_item"     boolean DEFAULT TRUE,
+        "rule_1"         varchar(5000),
+        "rule_2"         varchar(5000)
     );
 
     CREATE TABLE Weights (
