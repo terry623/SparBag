@@ -39,6 +39,22 @@
 			sessionStorage.setItem('kg', $("#input_kg").val());
 			location.href = "pages-booking.html";
 		}
+
+		var send_fb = function () {
+			var username = sessionStorage.getItem('haveuser');
+			console.log("hello");
+			axios.post('/api/load_article', {
+					username: username
+				})
+				.then(function (response) {
+					console.log(response.data[0].fb);
+					var string = "https://" + response.data[0].fb;
+					window.location.href = string;
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
+		}
 	</script>
 </head>
 
@@ -489,7 +505,7 @@
 						</div>
 
 						<!-- Reply to review popup -->
-						<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+						<!-- <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
 							<div class="small-dialog-header">
 								<h3>傳送訊息</h3>
 							</div>
@@ -497,9 +513,9 @@
 								<textarea cols="40" rows="3" placeholder="Your message to Tom"></textarea>
 								<button class="button">傳送</button>
 							</div>
-						</div>
+						</div> -->
 
-						<a href="#small-dialog" class="send-message-to-owner button fullwidth popup-with-zoom-anim">
+						<a class="send-message-to-owner button fullwidth" onClick="send_fb()">
 							<i class="sl sl-icon-envelope-open"></i> 傳送訊息</a>
 						<br>
 						<br>
