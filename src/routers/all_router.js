@@ -84,7 +84,7 @@ router.post('/store_article', function (req, res, next) {
         res.json(infor);
     }).catch(next);
 
-}); 
+});
 
 router.post('/load_article', function (req, res, next) {
 
@@ -100,7 +100,41 @@ router.post('/load_article', function (req, res, next) {
         res.json(infor);
     }).catch(next);
 
-}); 
+});
+
+router.post('/store_profile', function (req, res, next) {
+
+    const {
+        about_me,
+        username,
+        birthday,
+        select_country,
+        passportnumber,
+        phonenumber,
+        email,
+        select_money,
+        fb
+    } = req.body;
+
+    console.log("/ Store Profile /");
+    console.log(req.body);
+
+    signupModel.store_profile(
+        about_me,
+        username,
+        birthday,
+        select_country,
+        passportnumber,
+        phonenumber,
+        email,
+        select_money,
+        fb
+    ).then(infor => {
+        console.log("Success!");
+        res.json(infor);
+    }).catch(next);
+
+});
 
 router.post('/submit_weight', function (req, res, next) {
 

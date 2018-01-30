@@ -16,7 +16,12 @@ const schemaSql = `
         "about_me"       varchar(5000),
         "check_item"     boolean DEFAULT TRUE,
         "rule_1"         varchar(5000),
-        "rule_2"         varchar(5000)
+        "rule_2"         varchar(5000),
+        "birthday"       varchar(30) NOT NULL,
+        "select_country" integer DEFAULT 0,
+        "phonenumber"    varchar(30) NOT NULL,
+        "select_money"   integer DEFAULT 0,
+        "fb"             varchar(30) NOT NULL
     );
 
     CREATE TABLE Weights (
@@ -47,11 +52,6 @@ const schemaSql = `
         "ask_time"       varchar(30) NOT NULL,
         "ask_kg"         integer
     );
-
-    INSERT INTO Users (username, email, password, passportnumber) VALUES
-    ('111', '111@gmail.com', '111', 'xxx'),
-    ('222', '222@gmail.com', '222', 'xxx');
-
 `;
 
 db.none(schemaSql).then(() => {
