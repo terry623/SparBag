@@ -195,7 +195,7 @@
 							<ul>
 								<li>
 									<a href="dashboard-my-listings.html">已發布
-										<span class="nav-tag green" id="green_num"></span>
+										<!-- <span class="nav-tag green" id="green_num"></span> -->
 									</a>
 								</li>
 								<li>
@@ -373,7 +373,7 @@
 		console.log("Current User: " + username);
 		if (username !== null) {
 			replace_username(username);
-			get_green_num();
+			// get_green_num();
 		}
 
 		axios.post('/api/search_reserve_by_borrow', {
@@ -384,8 +384,17 @@
 				console.log(response.data);
 				jQuery.each(response.data, function (i, val) {
 
+					var message;
+					if (val.status == "pending-booking")
+						message = "核准中";
+					else if (val.status == "approved-booking")
+						message = "同意託運";
+					else if (val.status == "canceled-booking")
+						message = "拒絕託運";
+
 					var text =
-						'<li class="approved-booking"> \
+						'<li class=' + val.status +
+						'> \
 							<div class="list-box-listing bookings"> \
 								<div class="list-box-listing-img"> \
 									<img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=120" alt=""> \
@@ -395,36 +404,47 @@
 										<tr> \
 											<div class="list-box-listing-content"> \
 												<div class="inner"> \
-													<h3>' + val.lend +
-														'<span class="booking-status">同意託運</span> \
+													<h3>' +
+						val.lend +
+						'<span class="booking-status">' + message +
+						'</span> \
 													</h3> \
 													<a href="#" class="button gray reject"> \
 														<i class="sl sl-icon-close"></i> 取消預約</a> \
-													<h2>' + val.company + '-' + val.fly_1 + '</h2> \
+													<h2>' +
+						val.company + '-' + val.fly_1 +
+						'</h2> \
 													<br> \
 													<h2 style="display: inline;color: #7ccad3">' + val.dep +
-														'<i style="color: #282828" class="im im-icon-Arrow-Right2"></i> \
+						'<i style="color: #282828" class="im im-icon-Arrow-Right2"></i> \
 													</h2> \
-													<h2 style="display: inline;color: #7ccad3">' + val.arr +
-														'<i style="color: #7ccad3"></i> \
+													<h2 style="display: inline;color: #7ccad3">' +
+						val.arr +
+						'<i style="color: #7ccad3"></i> \
 													</h2> \
 													<div class="inner-booking-list"> \
 														<br> \
 														<h5>班機日期:</h5> \
 														<ul class="booking-list"> \
-															<li class="highlighted">' + val.date + '</li> \
+															<li class="highlighted">' +
+						val.date +
+						'</li> \
 														</ul> \
 													</div> \
 													<div class="inner-booking-list"> \
 														<h5>會面時間:</h5> \
 														<ul class="booking-list"> \
-															<li class="highlighted">' + val.date + ' ' +val.ask_time +'</li> \
+															<li class="highlighted">' +
+						val.date + ' ' + val.ask_time +
+						'</li> \
 														</ul> \
 													</div> \
 													<div class="inner-booking-list"> \
 														<h5>會面地點:</h5> \
 														<ul class="booking-list"> \
-															<li class="highlighted">' + val.meet_place +'</li> \
+															<li class="highlighted">' +
+						val.meet_place +
+						'</li> \
 														</ul> \
 													</div> \
 													<div class="inner-booking-list"> \
@@ -436,7 +456,9 @@
 													<div class="inner-booking-list"> \
 														<h5>新台幣:</h5> \
 														<ul class="booking-list"> \
-															<li>' + val.money + '</li> \
+															<li>' +
+						val.money +
+						'</li> \
 															<li>每公斤</li> \
 														</ul> \
 													</div> \
@@ -455,7 +477,9 @@
 													<font size="20"> \
 														<big> \
 															<big> \
-																<big>' + val.ask_kg + '</big> \
+																<big>' +
+						val.ask_kg +
+						'</big> \
 															</big> \
 														</big> \
 													</font>kg</span> \

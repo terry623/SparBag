@@ -41,13 +41,11 @@
 		}
 
 		var send_fb = function () {
-			var username = sessionStorage.getItem('haveuser');
-			console.log("hello");
 			axios.post('/api/load_article', {
-					username: username
+					username: sessionStorage.getItem('lend_user')
 				})
 				.then(function (response) {
-					console.log(response.data[0].fb);
+					console.log(response.data);
 					var string = "https://" + response.data[0].fb;
 					window.location.href = string;
 				})
@@ -791,6 +789,7 @@
 					$("#poster").text(response.data.username);
 					temp_remain_kg = response.data.remain_kg;
 					lend_user = response.data.username;
+					sessionStorage.setItem('lend_user', lend_user);
 
 					axios.post('/api/search_reserve', {
 							lend: lend_user,

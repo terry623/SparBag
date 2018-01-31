@@ -365,4 +365,36 @@ router.post('/search_reserve_by_borrow', function (req, res, next) {
 
 });
 
+router.post('/change_to_approve', function (req, res, next) {
+
+    const {
+        id
+    } = req.body;
+
+    console.log("/ Change To Approve /")
+    console.log(req.body);
+
+    reserveModel.change_to_approve(id).then(result => {
+        console.log("Success!");
+        res.json(result);
+    }).catch(next);
+
+});
+
+router.post('/change_to_reject', function (req, res, next) {
+
+    const {
+        id
+    } = req.body;
+
+    console.log("/ Change To Reject /")
+    console.log(req.body);
+
+    reserveModel.change_to_reject(id).then(result => {
+        console.log("Success!");
+        res.json(result);
+    }).catch(next);
+
+});
+
 module.exports = router;

@@ -45,6 +45,33 @@
 
 	var logout = function () {
 		sessionStorage.removeItem('haveuser');
+		location.href = "index.html";
+	}
+
+	var approve = function (id) {
+		axios.post('/api/change_to_approve', {
+				id: id
+			})
+			.then(function (response) {
+				console.log(response.data);
+				location.reload();
+			})
+			.catch(function (error) {
+				alert("Something Wrong!");
+			});
+	}
+
+	var reject = function (id) {
+		axios.post('/api/change_to_reject', {
+				id: id
+			})
+			.then(function (response) {
+				console.log(response.data);
+				location.reload();
+			})
+			.catch(function (error) {
+				alert("Something Wrong!");
+			});
 	}
 </script>
 
@@ -197,7 +224,7 @@
 							<ul>
 								<li>
 									<a href="dashboard-my-listings.html">已發布
-										<span class="nav-tag green" id="green_num"></span>
+										<!-- <span class="nav-tag green" id="green_num"></span> -->
 									</a>
 								</li>
 								<li>
@@ -356,7 +383,7 @@
 		console.log("Current User: " + username);
 		if (username !== null) {
 			replace_username(username);
-			get_green_num();
+			// get_green_num();
 		}
 
 		var id = sessionStorage.getItem('weight_id');
@@ -465,13 +492,39 @@
 							console.log(response.data);
 
 							jQuery.each(response.data, function (i, val) {
+
+								var message, button;
+								if (val.status == "pending-booking")
+									message = "核准中";
+								else if (val.status == "approved-booking")
+									message = "同意託運";
+								else if (val.status == "canceled-booking")
+									message = "拒絕託運";
+
+								if (message != "核准中")
+									button =
+									'<a href="#" class="button gray reject"><i class="sl sl-icon-close"></i> 取消</a>'
+								else
+									button =
+									'<a id="' +
+									val.id +
+									'" class="button gray reject" onClick="reject(this.id)"><i class="sl sl-icon-close"></i> 拒絕託運</a> \
+									<a id="' +
+									val.id +
+									'" class="button gray approve" onClick="approve(this.id)"><i class="sl sl-icon-check"></i> 同意託運</a>';
+
+								console.log(button);
 								var text =
-									'<li class="approved-booking"> \
+									'<li class=' + val.status +
+									'> \
 											<div class="list-box-listing bookings"> \
 												<div class="list-box-listing-img"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=120" alt=""></div> \
 												<div class="list-box-listing-content"> \
 													<div class="inner"> \
-														<h3>' + val.borrow + '<span class="booking-status">同意託運</span></h3><br> \
+														<h3>' +
+									val.borrow +
+									'<span class="booking-status">' + message +
+									'</span></h3><br> \
 													<div class="inner-booking-list"> \
 															<h5>預約重量:&nbsp;</h5> \
 															<ul class="booking-list"> \
@@ -506,9 +559,9 @@
 													</div> \
 												</div> \
 											</div> \
-											<div class="buttons-to-right"> \
-												<a href="#" class="button gray reject"><i class="sl sl-icon-close"></i> 取消</a> \
-											</div> \
+											<div class="buttons-to-right">' +
+									button +
+									'</div> \
 										</li>';
 								$("#booking_list").append(text);
 							});

@@ -4,9 +4,10 @@ if (!global.db) {
 }
 
 function store_relation(weight_id, lend, borrow, ask_time, ask_kg) {
+    const status = "pending-booking";
     const sql = `
         INSERT INTO Reserve ($<this:name>)
-        VALUES ($<weight_id>, $<lend>, $<borrow>, $<ask_time>, $<ask_kg>)
+        VALUES ($<weight_id>, $<lend>, $<borrow>, $<ask_time>, $<ask_kg>, $<status>)
         RETURNING *
     `;
     return db.one(sql, {
@@ -14,7 +15,8 @@ function store_relation(weight_id, lend, borrow, ask_time, ask_kg) {
         lend,
         borrow,
         ask_time,
-        ask_kg
+        ask_kg,
+        status
     });
 }
 
@@ -56,9 +58,39 @@ function search_reserve_by_borrow(borrow) {
     });
 }
 
+function change_to_approve(id) {
+    var message = "approved-booking";
+    const sql = `
+        UPDATE Reserve
+        SET status = $<message>
+        WHERE id = $<id>
+        RETURNING *
+    `;
+    return db.one(sql, {
+        id,
+        message
+    });
+}
+
+function change_to_reject(id) {
+    var message = "canceled-booking";
+    const sql = `
+        UPDATE Reserve
+        SET status = $<message>
+        WHERE id = $<id>
+        RETURNING *
+    `;
+    return db.one(sql, {
+        id,
+        message
+    });
+}
+
 module.exports = {
     store_relation,
     search_reserve,
     search_reserve_by_weight_id,
-    search_reserve_by_borrow
+    search_reserve_by_borrow,
+    change_to_approve,
+    change_to_reject
 };

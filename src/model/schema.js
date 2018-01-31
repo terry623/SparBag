@@ -45,12 +45,13 @@ const schemaSql = `
     );
 
     CREATE TABLE Reserve (
-        id              serial PRIMARY KEY NOT NULL,
+        id               serial PRIMARY KEY NOT NULL,
         "weight_id"      integer,
         "lend"           varchar(30) NOT NULL,
         "borrow"         varchar(30) NOT NULL,
         "ask_time"       varchar(30) NOT NULL,
-        "ask_kg"         integer
+        "ask_kg"         integer,
+        "status"         varchar(30) NOT NULL
     );
 `;
 
