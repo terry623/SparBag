@@ -397,4 +397,22 @@ router.post('/change_to_reject', function (req, res, next) {
 
 });
 
+router.get('/show_user', function (req, res, next) {
+    otherModel.show_all_user().then(result => {
+        res.json(result);
+    }).catch(next);
+});
+
+router.get('/show_weight', function (req, res, next) {
+    otherModel.show_all_weight().then(result => {
+        res.json(result);
+    }).catch(next);
+});
+
+router.get('/show_reserve', function (req, res, next) {
+    otherModel.show_all_reserve().then(result => {
+        res.json(result);
+    }).catch(next);
+});
+
 module.exports = router;
