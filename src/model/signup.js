@@ -1,8 +1,7 @@
-// if (!global.db) {
-require('../../config.js');
-const pgp = require('pg-promise')();
-const db = pgp(process.env.DB_URL);
-// }
+if (!global.db) {
+    const pgp = require('pg-promise')();
+    db = pgp(process.env.DB_URL);
+}
 
 function check_username(username) {
     const where = username ? `WHERE username = '$1:value'` : '';
