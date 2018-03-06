@@ -44,6 +44,20 @@
 			sessionStorage.removeItem('haveuser');
 			location.href = "index.html";
 		}
+
+		var send_fb = function (account) {
+			axios.post('/api/load_article', {
+					username: account
+				})
+				.then(function (response) {
+					console.log(response.data);
+					var string = "https://" + response.data[0].fb;
+					window.location.href = string;
+				})
+				.catch(function (error) {
+					alert("Something Wrong!");
+				});
+		}
 	</script>
 </head>
 
@@ -462,9 +476,8 @@
 															<li>每公斤</li> \
 														</ul> \
 													</div> \
-													<a href="" class="rate-review popup-with-zoom-anim"> \
-														<i class="sl sl-icon-envelope-open"></i> 傳送訊息</a> \
-													<a href="#small-dialog" class="rate-review popup-with-zoom-anim"> \
+													<a id = "' + val.borrow + '" class="rate-review popup-with-zoom-anim" onClick="send_fb(this.id)"><i class="sl sl-icon-envelope-open"></i> 傳送訊息</a> \
+													<a class="rate-review popup-with-zoom-anim"> \
 														<i class="sl sl-icon-star"></i> 給運送人評價</a> \
 												</div> \
 											</div> \

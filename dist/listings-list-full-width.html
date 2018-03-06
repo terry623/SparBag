@@ -55,7 +55,13 @@
 											<span> ' + val.fly_1 +
 							'</span> \
 											<br> \
-											<div class="star-rating" data-rating="3.5"></div> \
+											<div class="star-rating" data-rating="3.5"> \
+												<span class="star"></span> \
+												<span class="star"></span> \
+												<span class="star"></span> \
+												<span class="star"></span> \
+												<span class="star empty"></span> \
+											</div> \
 											<br> \
 											<h3>' +
 							val.dep + '&nbsp; \
@@ -83,7 +89,7 @@
 					});
 				})
 				.catch(function (error) {
-					alert("Something Wrong!");
+					alert("No flights, try another day !");
 				});
 
 		}
