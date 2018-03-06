@@ -35,9 +35,14 @@
 		}
 
 		var pass_time_kg = function () {
-			sessionStorage.setItem('time', $("#booking-time").val());
-			sessionStorage.setItem('kg', $("#input_kg").val());
-			location.href = "pages-booking.html";
+			var user = sessionStorage.getItem('haveuser');
+			if (user) {
+				sessionStorage.setItem('time', $("#booking-time").val());
+				sessionStorage.setItem('kg', $("#input_kg").val());
+				location.href = "pages-booking.html";
+			} else {
+				alert("You have to login!");
+			}
 		}
 
 		var send_fb = function () {
@@ -52,6 +57,10 @@
 				.catch(function (error) {
 					alert("Something Wrong!");
 				});
+		}
+		var logout = function () {
+			sessionStorage.removeItem('haveuser');
+			location.href = "index.html";
 		}
 	</script>
 </head>

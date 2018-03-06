@@ -181,7 +181,6 @@
 									<span>
 										<img src="images/userphoto/person_3.jpg" alt="">
 									</span>
-									Tom Perrin
 								</div>
 								<ul>
 									<li>
@@ -842,6 +841,9 @@
 		if (username !== null) {
 			replace_username(username);
 			// get_green_num();
+		}else{
+			alert("You have to login!");
+			window.history.back();
 		}
 	</script>
 
